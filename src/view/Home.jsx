@@ -14,10 +14,10 @@ const Home = () => {
             style={{ backgroundImage: `url(${polygonHome})` }}
           >
             <div className="w-full ">
-              <div className="w-fit mx-auto mt-28 text-white font-bold text-[48px]">
+              <div className="w-fit mx-auto mt-28 font-sansation text-white font-bold text-[48px]">
                 Request Web
               </div>
-              <div className="w-fit mx-auto  text-white font-bold text-[48px]">
+              <div className="w-fit mx-auto font-sansation text-white font-bold text-[48px]">
                 Event Tanpa Ribet!
               </div>
               <div className="w-fit mx-auto  text-white ">
