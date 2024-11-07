@@ -5,7 +5,7 @@ const login = () => {
     <div>
       <form>
         <label class="block">
-          <span class="block text-sm font-medium text-slate-700">Username</span>
+          <span class="block text-sm font-medium  text-slate-700">Username</span>
           <input
             type="text"
             value="tbone"
