@@ -1,6 +1,6 @@
 import React from "react";
 import polygonHome from "../assets/polygonHome.svg";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
   return (
@@ -13,7 +13,7 @@ const Home = () => {
             className="flex bg-fixed bg-cover bg-center w-screen h-full"
             style={{ backgroundImage: `url(${polygonHome})` }}
           >
-            <div className="fixed w-full ">
+            <div className="w-full ">
               <div className="w-fit mx-auto mt-28 text-white font-bold text-[48px]">
                 Request Web
               </div>

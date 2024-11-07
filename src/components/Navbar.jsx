@@ -13,7 +13,7 @@ const Navbar = () => {
           <img src={rePIT} alt="" />
         </div>
         <div className=" ">
-          <button className="select-none text-sm pb-1 h-8 rounded-md bg-[#7A5DDA] hover:bg-white px-[26px] py-[2px] mx-10 my-3  text-white hover:text-[#7A5DDA]">
+          <button className="select-none text-sm pb-1 h-8 rounded-md bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white px-[26px] py-[2px] mx-10 my-3  text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA]">
             Login
           </button>
         </div>

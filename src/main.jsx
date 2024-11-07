@@ -4,16 +4,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Home from "./view/Home.jsx";
-import Navbar from "./view/Navbar.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/Home",
     element: <Home />,
-  },
-  {
-    path: "/Navbar",
-    element: <Navbar />,
   },
   {
     path: "/",
