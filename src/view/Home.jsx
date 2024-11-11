@@ -13,7 +13,7 @@ const Home = () => {
 
         <div className="bg-home min-h-screen flex flex-col items-center justify-center">
           <div
-            className=" bg-cover bg-center w-full min-h-screen"
+            className="bg-cover bg-center w-full min-h-screen"
             style={{
               backgroundImage: `url(${polygonHome})`,
               backgroundAttachment: "fixed",
@@ -21,13 +21,13 @@ const Home = () => {
           >
             <div className="w-full flex flex-col gap-10 mt-28 items-center">
               <div className="text-center">
-                <h1 className="font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold text-[96px] leading-tight">
+                <h1 className="font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold text-6xl md:text-[96px] leading-tight">
                   Request Web Event <br />
                   Tanpa Ribet!
                 </h1>
               </div>
 
-              <div className="select-none w-fit text-white text-lg text-center">
+              <div className="select-none w-fit text-white text-lg text-center px-4 md:px-0">
                 Permudah proses request Web Event sesuai kebutuhanmu. <br />
                 Lengkapi pendaftaran, konfirmasi, dan revisi tanpa misskom 😝
               </div>
@@ -38,15 +38,15 @@ const Home = () => {
                 </button>
               </div>
 
-              <div className="bg-[#2B214C] h-[527px] w-[1026px] rounded-md mx-auto"></div>
+              <div className="bg-[#2B214C] h-[40vh] md:h-[527px] w-[90vw] md:w-[1026px] rounded-md mx-auto"></div>
 
               {/* SECTION 1 */}
-              <div className="grid grid-cols-3 gap-10 items-center mt-[300px] justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center mt-[50vh] md:mt-[300px] justify-items-center px-4 md:px-0">
                 <div className="col-span-2">
-                  <h1 className="text-center text-4xl font-sansation bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold">
+                  <h1 className="text-center text-2xl md:text-4xl font-sansation bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold">
                     RE-PIT
                   </h1>
-                  <p className="text-justify mt-4 px-40">
+                  <p className="text-justify mt-4 md:px-40">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
                     et massa mi. Aliquam in hendrerit urna. Pellentesque sit
                     amet sapien fringilla, mattis ligula consectetur, ultrices
@@ -64,26 +64,26 @@ const Home = () => {
                   <img
                     src={logo}
                     alt="RE-PIT by PITIK IMUD"
-                    className="h-64 flex"
+                    className="h-32 md:h-64"
                   />
                 </div>
               </div>
 
               {/* SECTION 2 */}
-              <div className="grid grid-cols-3 gap-10 items-center mt-[300px] justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center mt-[50vh] md:mt-[300px] justify-items-center px-4 md:px-0">
                 <div className="flex justify-center">
                   <img
                     src={karakter}
                     alt="RE-PIT by PITIK IMUD"
-                    className="h-64 flex"
+                    className="h-32 md:h-64"
                   />
                 </div>
 
-                <div className="col-span-2 ">
-                  <h1 className="text-center text-4xl font-sansation bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold">
+                <div className="col-span-2">
+                  <h1 className="text-center text-2xl md:text-4xl font-sansation bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold">
                     FITUR UTAMA
                   </h1>
-                  <p className="text-justify mt-4 px-40">
+                  <p className="text-justify mt-4 md:px-40">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
                     et massa mi. Aliquam in hendrerit urna. Pellentesque sit
                     amet sapien fringilla, mattis ligula consectetur, ultrices
@@ -99,59 +99,69 @@ const Home = () => {
               </div>
 
               {/* STAFF IMUD */}
-              <div className="text-center mt-[300px]">
-                <h1 className="font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold text-[40px] leading-tight">
+              <div className="text-center mt-[50vh] md:mt-[300px]">
+                <h1 className="font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold text-3xl md:text-[40px] leading-tight">
                   Staff Imud PIT
                 </h1>
-                <h1 className="font-sansation select-none bg-white bg-clip-text text-transparent font-bold text-[40px] leading-tight">
+                <h1 className="font-sansation select-none bg-white bg-clip-text text-transparent font-bold text-3xl md:text-[40px] leading-tight">
                   BEM FILKOM Arthakara
                 </h1>
               </div>
-              <div className="grid grid-cols-3 gap-44 justify-center items-center">
-                <div className="bg-[#ffffff] h-80 w-64 border border-black rounded-md flex items-center justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-44 justify-center items-center">
+                <div className="bg-[#ffffff] h-64 md:h-80 w-48 md:w-64 border border-black rounded-md flex items-center justify-center">
                   01
                 </div>
-                <div className="bg-[#ffffff] h-80 w-64 rounded-md flex items-center justify-center">
+                <div className="bg-[#ffffff] h-64 md:h-80 w-48 md:w-64 rounded-md flex items-center justify-center">
                   02
                 </div>
-                <div className="bg-[#ffffff] h-80 w-64 rounded-md flex items-center justify-center">
+                <div className="bg-[#ffffff] h-64 md:h-80 w-48 md:w-64 rounded-md flex items-center justify-center">
                   03
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-72 justify-center items-center text-center">
-                <div className="flex flex-col items-center font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA]  bg-clip-text text-transparent leading-7">
-                  <h1 className="text-[28px] font-bold">DAFFA</h1>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-72 justify-center items-center text-center">
+                <div className="flex flex-col items-center font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent leading-7">
+                  <h1 className="text-xl md:text-[28px] font-bold">DAFFA</h1>
                   <span>
-                    <p className="text-white text-16">UI/UX Designer</p>
+                    <p className="text-white text-base md:text-16">
+                      UI/UX Designer
+                    </p>
                   </span>
                 </div>
 
-                <div className="flex flex-col items-center font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA]  bg-clip-text text-transparent leading-7">
-                  <h1 className="text-[28px] font-bold">RAJISTHA</h1>
+                <div className="flex flex-col items-center font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent leading-7">
+                  <h1 className="text-xl md:text-[28px] font-bold">RAJISTHA</h1>
                   <span>
-                    <p className="text-white text-16">Front-end Developer</p>
+                    <p className="text-white text-base md:text-16">
+                      Front-end Developer
+                    </p>
                   </span>
                 </div>
 
-                <div className="flex flex-col items-center font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA]  bg-clip-text text-transparent leading-7">
-                  <h1 className="text-[28px] font-bold">JEPON</h1>
+                <div className="flex flex-col items-center font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent leading-7">
+                  <h1 className="text-xl md:text-[28px] font-bold">JEPON</h1>
                   <span>
-                    <p className="text-white text-16">Back-end Developer</p>
+                    <p className="text-white text-base md:text-16">
+                      Back-end Developer
+                    </p>
                   </span>
                 </div>
               </div>
 
-              <div className="bg-[#2B214C] p-[100px] w-full flex items-center justify-center mt-[300px]">
+              <div className="bg-[#2B214C] p-20 md:p-[100px] w-full flex items-center justify-center mt-[50vh] md:mt-[300px]">
                 <div className="grid grid-cols-1 items-center justify-items-center w-full">
                   <div className="flex space-x-2">
-                    <img src={bem} alt="BEM Logo" className="h-[120px]" />
+                    <img
+                      src={bem}
+                      alt="BEM Logo"
+                      className="h-20 md:h-[120px]"
+                    />
                     <img
                       src={logo}
                       alt="RE-PIT Logo"
-                      className="h-[90px] mt-4"
+                      className="h-16 md:h-[90px] mt-4"
                     />
                   </div>
-                  <h1 className="mt-[30px] text-center">
+                  <h1 className="mt-8 md:mt-[30px] text-center text-base md:text-lg">
                     Made with ❤️ by Staff Imud PIT BEM FILKOM Arthakara
                   </h1>
                 </div>
