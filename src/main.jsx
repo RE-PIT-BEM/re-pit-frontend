@@ -5,6 +5,8 @@ import "./index.css";
 import App from "./App";
 import Home from "./view/Home.jsx";
 import Navbar from "./components/Navbar.jsx";
+import Login from "./components/login.jsx";
+import Dashboard from "./view/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/Login",
+    element: <Login />,
+  },
+  {
+    path: "/Dashboard",
+    element: <Dashboard />,
   },
 ]);
 

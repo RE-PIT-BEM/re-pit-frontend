@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import logo from "../assets/Logo.svg";
 import karakter from "../assets/Karakter.svg";
 import bem from "../assets/Bem.svg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -33,9 +34,11 @@ const Home = () => {
               </div>
 
               <div className="w-fit">
-                <button className="select-none font-sansation text-sm h-10 rounded-md bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white px-8 py-1 text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA]">
-                  Request
-                </button>
+                <Link to="/Login">
+                  <button className="select-none font-sansation text-sm h-10 rounded-md bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white px-8 py-1 text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300">
+                    Request
+                  </button>
+                </Link>
               </div>
 
               <div className="bg-[#2B214C] h-[40vh] md:h-[527px] w-[90vw] md:w-[1026px] rounded-md mx-auto"></div>

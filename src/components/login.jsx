@@ -1,26 +1,46 @@
 import React from "react";
+import polygonHome from "../assets/polygonHome.svg";
+import bem from "../assets/bem.svg";
+import { Link } from "react-router-dom";
 
-const login = () => {
+const Login = () => {
   return (
-    <div>
-      <form>
-        <label class="block">
-          <span class="block text-sm font-medium  text-slate-700">Username</span>
+    <>
+      <div
+        className="h-screen bg-cover flex items-center bg-center w-full min-h-screen"
+        style={{ backgroundImage: `url(${polygonHome})` }}
+      >
+        <div className="w-4/12 bg-white mx-auto px-6 py-20 rounded-xl pl-12 pr-12">
+          <h1 className="w-fit mx-auto text-black text-[26px] font-bold font-sansation -mt-4  ">
+            Login
+          </h1>
+          <p className="w-fit mx-auto my-1 text-gray-400 text-[16px] ">
+            Pakai Akun SIAM yaaa!
+          </p>
+
+          <h1 className="text-bold text-black mt-4">NIM</h1>
           <input
+            placeholder="NIM"
             type="text"
-            value="tbone"
-            disabled
-            class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500
-    "
+            className="w-full bg-gray-100 border border-[#E6E6E6] py-4 px-3 mt-1 mb-4 rounded-[10px] focus:border-[#EE333D] focus:outline-none text-slate-600"
           />
-        </label>
-      </form>
-    </div>
+
+          <h1 className="text-bold text-black">Password</h1>
+          <input
+            placeholder="Password"
+            type="password"
+            className="mt-1 block w-full bg-gray-100 text-gray-700 border border-[#E6E6E6] py-4 px-3 mb-4 rounded-[10px] focus:outline-none focus:bg-white focus:border-[#EE333D]"
+          />
+
+          <Link to="/Dashboard">
+            <button className="w-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300">
+              Login
+            </button>
+          </Link>
+        </div>
+      </div>
+    </>
   );
 };
 
-export default login;
+export default Login;
