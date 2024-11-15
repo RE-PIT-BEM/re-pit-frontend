@@ -6,11 +6,12 @@ import App from "./App";
 import Home from "./view/Home.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Login from "./components/login.jsx";
-import Dashboard from "./view/Dashboard.jsx";
+import Request from "./view/Request.jsx";
+import DaftarRequest from "./view/DaftarRequest.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/Home",
+    path: "/home",
     element: <Home />,
   },
   {
@@ -18,12 +19,17 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/Login",
+    path: "/login",
     element: <Login />,
   },
+
   {
-    path: "/Dashboard",
-    element: <Dashboard />,
+    path: "/request",
+    element: <Request />,
+  },
+  {
+    path: "/daftar-request",
+    element: <DaftarRequest />,
   },
 ]);
 
