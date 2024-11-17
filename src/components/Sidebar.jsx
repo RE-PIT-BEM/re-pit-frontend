@@ -49,11 +49,12 @@ const Sidebar = () => {
           ☰
         </button>
       </div>
+
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 ${
+        className={`fixed top-0 left-0 w-full lg:w-64 lg:h-screen bg-[#151618] text-white transform transition-transform duration-300 ease-in-out z-10 ${
           isSidebarOpen ? "translate-y-0" : "-translate-y-full"
-        } lg:h-full w-full lg:w-64 bg-[#151618] text-white transform lg:translate-y-0 lg:relative lg:transform-none transition-transform duration-300 ease-in-out z-10`}
+        } lg:translate-y-0 lg:transform-none`}
       >
         <div className="flex items-center h-16 px-4 lg:border-b-2 lg:border-[#7A5DDA]">
           <img
@@ -82,7 +83,7 @@ const Sidebar = () => {
       {/* Overlay for mobile */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-50 lg:hidden"
+          className="fixed inset-0 bg-black opacity-50 lg:hidden z-0"
           onClick={toggleSidebar}
         ></div>
       )}

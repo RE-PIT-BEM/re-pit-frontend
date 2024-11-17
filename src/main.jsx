@@ -5,7 +5,7 @@ import "./index.css";
 import App from "./App";
 import Home from "./view/Home.jsx";
 import Navbar from "./components/Navbar.jsx";
-import Login from "./components/login.jsx";
+import Login from "./components/Login.jsx";
 import Request from "./view/Request.jsx";
 import DaftarRequest from "./view/DaftarRequest.jsx";
 

@@ -67,7 +67,7 @@ const Home = () => {
                   <img
                     src={logo}
                     alt="RE-PIT by PITIK IMUD"
-                    className="mr-20 h-32 md:h-64 pointer-events-none"
+                    className="mr-48 h-32 md:h-64 pointer-events-none"
                   />
                 </div>
               </div>
@@ -78,7 +78,7 @@ const Home = () => {
                   <img
                     src={karakter}
                     alt="RE-PIT by PITIK IMUD"
-                    className="ml-12 h-32 md:h-64 pointer-events-none"
+                    className="ml-40 h-32 md:h-64 pointer-events-none"
                   />
                 </div>
 
