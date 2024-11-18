@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import rePIT from "../assets/rePIT.svg";
+import daftareq from "../assets/button/Daftareq.svg";
+import logout from "../assets/button/Logout.svg";
+import reqbaru from "../assets/button/Reqbaru.svg";
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState("");
@@ -22,10 +25,10 @@ const Sidebar = () => {
         setActiveLink(to);
         toggleSidebar();
       }}
-      className={`block p-4 mx-auto py-2 rounded-md text-[14px] font-sansation duration-300 ${
+      className={`block p-4 mx-auto py-2 rounded-[8px] text-[14px] font-sansation duration-300 ${
         activeLink === to
           ? "bg-gradient-to-r from-[#7A5DDA] to-[#493883] shadow-lg text-white"
-          : "bg-[#151618] hover:bg-gray-600 text-white"
+          : "bg-[#151618] text-white"
       }`}
     >
       {children}
@@ -44,9 +47,10 @@ const Sidebar = () => {
         <button
           onClick={toggleSidebar}
           aria-label="Toggle sidebar"
-          className="border-2 border-[#7A5DDA] text-white rounded-md px-2 p-1"
+          className="border-2 border-[#7A5DDA] text-white rounded-md p-1"
+          style={{ width: "2rem" }}
         >
-          ☰
+          {isSidebarOpen ? "X" : "☰"}
         </button>
       </div>
 
@@ -64,17 +68,49 @@ const Sidebar = () => {
           />
         </div>
         <nav className="mt-5 mx-auto ml-4 mr-4 space-y-4">
-          <NavLink to="/request">Request Baru</NavLink>
-          <NavLink to="/daftar-request">Daftar Request</NavLink>
+          <NavLink
+            to="/request"
+            className="flex items-center text-gray-700 hover:text-blue-600"
+          >
+            <div className="flex items-center w-full">
+              <img
+                src={reqbaru}
+                alt="BEM Logo"
+                className="h-5 w-5 object-contain"
+              />
+              <span className="ml-2 text-sm">Request Baru</span>
+            </div>
+          </NavLink>
+
+          <NavLink
+            to="/daftar-request"
+            className="flex items-center text-gray-700 hover:text-blue-600"
+          >
+            <div className="flex items-center w-full">
+              <img
+                src={daftareq}
+                alt="BEM Logo"
+                className="h-5 w-5 object-contain"
+              />
+              <span className="ml-2 text-sm">Daftar Request</span>
+            </div>
+          </NavLink>
         </nav>
+
         <div className="border-b-[1px] border-[#FFFFFF1A] mx-4 mt-6"></div>
         <Link to="/home">
           <div className="mx-auto mt-8 ml-4 mr-4 mb-4">
             <button
               onClick={toggleSidebar}
-              className="block w-full py-[6px] mx-auto border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white hover:shadow-[0_0_5px_0_#ffffff] duration-300"
+              className="flex items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white hover:shadow-[0_0_5px_0_#ffffff] duration-300"
             >
-              Logout
+              <span>Logout</span>
+              <img
+                src={logout}
+                alt="Logout Icon"
+                className="ml-3 h-4 w-4 object-contain mr-2"
+              />
+             
             </button>
           </div>
         </Link>
