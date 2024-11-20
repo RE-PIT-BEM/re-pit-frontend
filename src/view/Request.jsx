@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Sidebar from "../components/Sidebar";
 import logo from "../assets/Logo.svg";
 import bem from "../assets/Bem.svg";
 import { Link } from "react-router-dom";
 
 const Request = () => {
+  const [today] = useState(() => {
+    const currentDate = new Date();
+    return currentDate.toISOString().split("T")[0];
+  });
+
+  const [minDate] = useState(() => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 8); // Tambahkan 8 hari dari hari ini
+    return currentDate.toISOString().split("T")[0]; // Format ke YYYY-MM-DD
+  });
   return (
     <div className="relative min-h-screen bg-home flex flex-col">
       {" "}
@@ -16,7 +28,7 @@ const Request = () => {
 
         {/* Main Content */}
         <div className="flex-grow p-8">
-          <h1 className="text-2xl font-bold mb-4 font-sansation text-white">
+          <h1 className="text-2xl font-bold mb-4 mt-6 font-sansation text-white">
             Halo, Ajes!
           </h1>
 
@@ -37,7 +49,7 @@ const Request = () => {
                 className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
               />
 
-              <div className="grid grid-cols-2 gap-8 ">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Kementrian / Kebiroan{" "}
@@ -63,7 +75,7 @@ const Request = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-8 pb-28">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Nama PJ Proker / Event{" "}
@@ -100,7 +112,7 @@ const Request = () => {
                 style={{ resize: "none" }}
               />
 
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Timeline Proker <span className="text-[#7A5DDA]">*</span>
@@ -133,7 +145,7 @@ const Request = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Foto Kegiatan Proker / Event{" "}
@@ -158,7 +170,7 @@ const Request = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-8 pb-28">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Pilihan Divisi <span className="text-[#7A5DDA]">*</span>
@@ -175,7 +187,7 @@ const Request = () => {
 
               {/*____________________________________________________ BARIS 8-11 _____________________________________________________________________ */}
               {/* Baris 8 */}
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Pesan Ketika Diterima{" "}
@@ -211,7 +223,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
               </div>
 
               {/* Baris 9 */}
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Quotes <span className="text-[#7A5DDA]">*</span>
@@ -242,7 +254,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
               </div>
               {/* Baris 10 */}
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Data yang dibutuhkan Proker / Event{" "}
@@ -279,7 +291,7 @@ No Hp :"
               </div>
 
               {/* Baris 11 */}
-              <div className="grid grid-cols-2 gap-8 pb-28">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Angkatan yang bisa mendaftar{" "}
@@ -305,7 +317,7 @@ No Hp :"
                 </div>
               </div>
               {/*____________________________________________________ BARIS 12 _____________________________________________________________________ */}
-              <div className="grid grid-cols-3 gap-8 pb-20">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-20">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Tanggal Buka Pendaftaran{" "}
@@ -336,6 +348,18 @@ No Hp :"
                   <input
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="date"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                  />
+                </div>
+                <div>
+                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                    Tanggal Rilis Website{" "}
+                    <span className="text-[#7A5DDA]">*</span>
+                  </h1>
+                  <input
+                    placeholder=""
+                    type="date"
+                    min={minDate}
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
                 </div>

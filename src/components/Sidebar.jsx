@@ -98,7 +98,7 @@ const Sidebar = () => {
         </nav>
 
         <div className="border-b-[1px] border-[#FFFFFF1A] mx-4 mt-6"></div>
-        <Link to="/home">
+        <Link to="/">
           <div className="mx-auto mt-8 ml-4 mr-4 mb-4">
             <button
               onClick={toggleSidebar}
@@ -110,7 +110,6 @@ const Sidebar = () => {
                 alt="Logout Icon"
                 className="ml-3 h-4 w-4 object-contain mr-2"
               />
-             
             </button>
           </div>
         </Link>
