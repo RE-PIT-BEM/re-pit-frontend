@@ -6,6 +6,9 @@ export default {
       colors: {
         uhuy: "#305CDE",
         home: "#131416",
+        sukses: "#7FDF4B",
+        warning: "#EEBA56",
+        error: "#E5342F",
       },
       fontFamily: {
         sansation: ["Sansation", "sans-serif"],

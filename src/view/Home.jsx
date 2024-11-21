@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import logo from "../assets/Logo.svg";
 import bem from "../assets/Bem.svg";
 import karakter from "../assets/Karakter.svg";
+import landingPage from "../assets/landingPage.svg";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -22,7 +23,7 @@ const Home = () => {
           >
             <div className="w-full flex flex-col gap-10 mt-28 items-center">
               <div className="text-center">
-                <h1 className="font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold xl:text-[96px] lg:text-[96px] text-[48px] leading-tight">
+                <h1 className="font-sansation select-none bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent font-bold xl:text-[96px] lg:text-[96px] text-[48px] leading-tight">
                   Request Web Event <br />
                   Tanpa Ribet!
                 </h1>
@@ -41,16 +42,18 @@ const Home = () => {
                 </Link>
               </div>
 
-              <div className="bg-[#2B214C] h-[40vh] lg:h-[527px] w-[90vw] lg:w-[1026px] rounded-lg mx-auto"></div>
+              <div className="h-[40vh] lg:h-[527px] w-[90vw] lg:w-[1026px] rounded-lg mx-auto">
+                <img src={landingPage} alt="" className="shadow-black" />
+              </div>
 
               {/* SECTION 1 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mt-[50vh] lg:mt-[300px] justify-items-center px-4 lg:px-0">
                 {/* Kontainer teks */}
                 <div className="order-2 lg:order-1">
-                  <h1 className="text-center text-2xl lg:text-4xl font-sansation bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold">
+                  <h1 className="text-center lg:pl-44 text-2xl lg:text-4xl font-sansation bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent font-bold">
                     RE-PIT
                   </h1>
-                  <p className="text-justify mt-4 lg:px-10">
+                  <p className="text-justify mt-4 lg:pl-44">
                     RE-PIT adalah platform request Web Event yang dikembangkan
                     oleh Kebiroan PIT BEM FILKOM UB untuk memfasilitasi
                     pengajuan, pengelolaan, dan konfirmasi event secara
@@ -84,10 +87,10 @@ const Home = () => {
                 </div>
 
                 <div className="order-2 lg:order-2">
-                  <h1 className="text-center text-2xl lg:text-4xl font-sansation bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold">
+                  <h1 className="text-center lg:pr-44  text-2xl lg:text-4xl font-sansation bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent font-bold">
                     FITUR UTAMA
                   </h1>
-                  <p className="text-justify mt-4 lg:px-10">
+                  <p className="text-justify mt-4 lg:pr-44">
                     Re-PIT menawarkan kemudahan dalam pengajuan Web Event dengan
                     sistem terstruktur, notifikasi otomatis, dan panel
                     administrasi lengkap untuk pengelolaan pendaftaran yang
@@ -102,7 +105,7 @@ const Home = () => {
 
               {/* STAFF IMUD */}
               <div className="text-center mt-[50vh] lg:mt-[300px]">
-                <h1 className="font-sansation select-none bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent font-bold text-3xl lg:text-[40px] leading-tight">
+                <h1 className="font-sansation select-none bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent font-bold text-3xl lg:text-[40px] leading-tight">
                   Staff Imud PIT
                 </h1>
                 <h1 className="font-sansation select-none bg-white bg-clip-text text-transparent font-bold text-3xl lg:text-[40px] leading-tight">

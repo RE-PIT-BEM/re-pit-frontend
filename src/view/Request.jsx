@@ -35,7 +35,7 @@ const Request = () => {
           <div className="border rounded-[15px] border-1 border-[#7A5DDA]">
             {/*____________________________________________________ BARIS 1-3 _____________________________________________________________________ */}
 
-            <h1 className="font-sansation mt-8 font-bold text-center text-2xl bg-gradient-to-r from-[#493883] to-[#cfc0ff] bg-clip-text text-transparent">
+            <h1 className="font-sansation mt-8 font-bold text-center text-2xl bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent">
               Request Baru
             </h1>
 
