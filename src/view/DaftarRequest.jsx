@@ -28,7 +28,6 @@ const Request = () => {
               </h1>
               <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-sukses flex items-center justify-start lg:justify-end ">
                 Accepted
-               
               </h1>
             </div>
 
