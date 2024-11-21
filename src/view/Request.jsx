@@ -5,12 +5,15 @@ import Sidebar from "../components/Sidebar";
 import logo from "../assets/Logo.svg";
 import bem from "../assets/Bem.svg";
 import { Link } from "react-router-dom";
+import useUserStore from "../lib/userStore";
 
 const Request = () => {
   const [today] = useState(() => {
     const currentDate = new Date();
     return currentDate.toISOString().split("T")[0];
   });
+
+  const user = useUserStore((state) => state.user);
 
   const [minDate] = useState(() => {
     const currentDate = new Date();
@@ -22,14 +25,14 @@ const Request = () => {
       {" "}
       <div className="flex flex-grow">
         {/* Sidebar */}
-        <div className="w-64">
+        <div className="w-0 lg:w-64">
           <Sidebar />
         </div>
 
         {/* Main Content */}
         <div className="flex-grow p-8">
           <h1 className="text-2xl font-bold mb-4 mt-6 font-sansation text-white">
-            Halo, Ajes!
+            Halo, ajes!
           </h1>
 
           <div className="border rounded-[15px] border-1 border-[#7A5DDA]">

@@ -9,6 +9,12 @@ import Login from "./components/Login.jsx";
 import Request from "./view/Request.jsx";
 import DaftarRequest from "./view/DaftarRequest.jsx";
 import Reason from "./components/Reason.jsx";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Toaster } from "react-hot-toast";
+import WrapperApp from "./components/WrapperApp.jsx";
+
+// Create a client
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -40,6 +46,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <WrapperApp>
+        <Toaster position="bottom-right" reverseOrder={false} />
+        <RouterProvider router={router} />
+      </WrapperApp>
+    </QueryClientProvider>
   </React.StrictMode>
 );

@@ -11,7 +11,7 @@ const Request = () => {
       {" "}
       <div className="flex flex-grow">
         {/* Sidebar */}
-        <div className="w-64">
+        <div className="w-0 lg:w-64">
           <Sidebar />
         </div>
 
