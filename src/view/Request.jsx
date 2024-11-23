@@ -6,20 +6,76 @@ import logo from "../assets/Logo.svg";
 import bem from "../assets/Bem.svg";
 import { Link } from "react-router-dom";
 import useUserStore from "../lib/userStore";
+import { useForm } from "react-hook-form";
+import { getAccessToken } from "../lib/tokenUtils";
+import { useMutation } from "react-query";
+import toast from "react-hot-toast";
+import api from "../lib/api";
 
 const Request = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    reset,
+  } = useForm();
+
   const [today] = useState(() => {
     const currentDate = new Date();
     return currentDate.toISOString().split("T")[0];
   });
-
-  const user = useUserStore((state) => state.user);
 
   const [minDate] = useState(() => {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 8); // Tambahkan 8 hari dari hari ini
     return currentDate.toISOString().split("T")[0]; // Format ke YYYY-MM-DD
   });
+
+  const mutationAddReq = useMutation((data) => {
+    const token = getAccessToken();
+    if (!token) return null;
+    return api.post("/request", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  });
+
+  const onSubmit = (data) => {
+    const openDate = new Date(data.program_open_date).toISOString();
+    const closeDate = new Date(data.program_close_date).toISOString();
+    const announcementDate = new Date(
+      data.program_announcement_date
+    ).toISOString();
+    const websiteReleaseDate = new Date(
+      data.website_release_date
+    ).toISOString();
+
+    data = {
+      ...data,
+      program_open_date: openDate,
+      program_close_date: closeDate,
+      program_announcement_date: announcementDate,
+      website_release_date: websiteReleaseDate,
+    };
+
+    mutationAddReq.mutate(data, {
+      onError: (error, variables, context) => {
+        // An error happened!
+        console.log(`error: `, error);
+        const errorMessage = error.response.data.messages;
+        toast.error(errorMessage);
+      },
+      onSuccess: (data, variables, context) => {
+        const message = data.data.message;
+        reset();
+        toast.success(message);
+        navigate("/daftar-request");
+      },
+    });
+  };
+
   return (
     <div className="relative min-h-screen bg-home flex flex-col">
       {" "}
@@ -30,7 +86,7 @@ const Request = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-grow p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex-grow p-8">
           <h1 className="text-2xl font-bold mb-4 mt-8 lg:mt-4 font-sansation text-white">
             Halo, ajes!
           </h1>
@@ -47,10 +103,16 @@ const Request = () => {
                 Nama Program Kerja <span className="text-[#7A5DDA]">*</span>
               </h1>
               <input
+                {...register("program_name", { required: true })}
                 placeholder="FILAFEST"
                 type="text"
                 className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
               />
+              {errors.program_name && (
+                <small className="text-red-500">
+                  Nama Program Kerja harus diisi!
+                </small>
+              )}
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
                 <div>
@@ -59,10 +121,16 @@ const Request = () => {
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
+                    {...register("department", { required: true })}
                     placeholder="PIT"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.department && (
+                    <small className="text-red-500">
+                      Kementrian / Kebiroan harus diisi!
+                    </small>
+                  )}
                 </div>
 
                 <div>
@@ -71,10 +139,16 @@ const Request = () => {
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
+                    {...register("group_link", { required: true })}
                     placeholder="https://waa.wwa/88080"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.group_link && (
+                    <small className="text-red-500">
+                      Link Grup Koordinasi harus diisi!
+                    </small>
+                  )}
                 </div>
               </div>
 
@@ -85,10 +159,14 @@ const Request = () => {
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
+                    {...register("contact_name", { required: true })}
                     placeholder="Ajes"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.contact_name && (
+                    <small className="text-red-500">Nama PJ harus diisi!</small>
+                  )}
                 </div>
 
                 <div>
@@ -97,10 +175,16 @@ const Request = () => {
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
+                    {...register("contact_info", { required: true })}
                     placeholder="081246091171"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.contact_info && (
+                    <small className="text-red-500">
+                      Kontak PJ harus diisi!
+                    </small>
+                  )}
                 </div>
               </div>
 
@@ -109,11 +193,17 @@ const Request = () => {
                 Deskripsi Proker <span className="text-[#7A5DDA]">*</span>
               </h1>
               <textarea
+                {...register("program_description", { required: true })}
                 placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus."
                 className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white placeholder:text-left placeholder:top-0"
                 rows="6"
                 style={{ resize: "none" }}
               />
+              {errors.program_description && (
+                <small className="text-red-500">
+                  Deskripsi Proker harus diisi!
+                </small>
+              )}
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
@@ -121,17 +211,23 @@ const Request = () => {
                     Timeline Proker <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
+                    {...register("program_timeline", { required: true })}
                     placeholder="PKKMB
-- Coming Soon: 19 Maret
-- Open Tender: 21 Maret - 25 Maret
-- Close Registration: 27 Maret
-- FnP: 29 Maret - 31 Maret (daring)
-- Pengumuman: 2 April"
+            - Coming Soon: 19 Maret
+            - Open Tender: 21 Maret - 25 Maret
+            - Close Registration: 27 Maret
+            - FnP: 29 Maret - 31 Maret (daring)
+            - Pengumuman: 2 April"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
+                  {errors.program_timeline && (
+                    <small className="text-red-500">
+                      Timeline Proker harus diisi!
+                    </small>
+                  )}
                 </div>
 
                 <div>
@@ -139,6 +235,7 @@ const Request = () => {
                     Timeline Extend
                   </h1>
                   <textarea
+                    {...register("program_timeline_extend")}
                     placeholder="info info"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
@@ -155,10 +252,16 @@ const Request = () => {
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
+                    {...register("program_photo_url", { required: true })}
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.program_photo_url && (
+                    <small className="text-red-500">
+                      Foto Kegiatan harus diisi!
+                    </small>
+                  )}
                 </div>
 
                 <div>
@@ -166,6 +269,7 @@ const Request = () => {
                     Logo Proker / Event{" "}
                   </h1>
                   <input
+                    {...register("program_logo_url")}
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
@@ -179,10 +283,16 @@ const Request = () => {
                     Pilihan Divisi <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
+                    {...register("program_division", { required: true })}
                     placeholder="DDM, Humas, Acara"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.program_division && (
+                    <small className="text-red-500">
+                      Pilihan Divisi harus diisi!
+                    </small>
+                  )}
                 </div>
 
                 <div> </div>
@@ -197,6 +307,7 @@ const Request = () => {
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
+                    {...register("acceptence_message", { required: true })}
                     placeholder="SELAMAT KAMU DITERIMA (>.<)
 
 Silahkan simak pengumuman di bawah ini:
@@ -208,6 +319,11 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     rows="6"
                     style={{ resize: "none" }}
                   />
+                  {errors.acceptence_message && (
+                    <small className="text-red-500">
+                      Pesan Ketika Diterima harus diisi!
+                    </small>
+                  )}
                 </div>
 
                 <div>
@@ -216,28 +332,37 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
+                    {...register("rejection_message", { required: true })}
                     placeholder="yahahhahaa ditolak "
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
+                  {errors.rejection_message && (
+                    <small className="text-red-500">
+                      Pesan Ketika Ditolak harus diisi!
+                    </small>
+                  )}
                 </div>
               </div>
 
-              {/* Baris 9 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Quotes <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
+                    {...register("program_quotes", { required: true })}
                     placeholder="“Porto nomor sekian, UKM hindu yang utama” - Ajes"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
+                  {errors.program_quotes && (
+                    <small className="text-red-500">Quotes harus diisi!</small>
+                  )}
                 </div>
 
                 <div>
@@ -245,6 +370,9 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     Alur Pendaftaran <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
+                    {...register("program_registration_flow", {
+                      required: true,
+                    })}
                     placeholder="1. Peserta membuka link pendaftaran yang telah disediakan oleh BEM FILKOM
 2. Peserta membaca panduan Alur Pendaftaran Open Tender
 3. ....
@@ -254,69 +382,53 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     rows="6"
                     style={{ resize: "none" }}
                   />
-                </div>
-              </div>
-              {/* Baris 10 */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
-                    Data yang dibutuhkan Proker / Event{" "}
-                    <span className="text-[#7A5DDA]">*</span>
-                  </h1>
-                  <textarea
-                    placeholder="Nama Lengkap :
-Nama Panggilan :
-Prodi :
-Tempat, tanggal Lahir :
-No Hp :"
-                    type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
-                    rows="6"
-                    style={{ resize: "none" }}
-                  />
-                </div>
-
-                <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
-                    Alur Pendaftaran <span className="text-[#7A5DDA]">*</span>
-                  </h1>
-                  <textarea
-                    placeholder="1. Peserta membuka link pendaftaran yang telah disediakan oleh BEM FILKOM
-2. Peserta membaca panduan Alur Pendaftaran Open Tender
-3. ....
-4. .... "
-                    type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
-                    rows="6"
-                    style={{ resize: "none" }}
-                  />
+                  {errors.program_registration_flow && (
+                    <small className="text-red-500">
+                      Alur Pendaftaran harus diisi!
+                    </small>
+                  )}
                 </div>
               </div>
 
-              {/* Baris 11 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
-                    Angkatan yang bisa mendaftar{" "}
+                    Link Form Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
-                    placeholder="2023 & 2024"
-                    type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
-                  />
-                </div>
-
-                <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
-                    Link Google Drive untuk template berkas pendaftaran{" "}
-                    <span className="text-[#7A5DDA]">*</span>
-                  </h1>
-                  <input
+                    {...register("program_application_form", {
+                      required: true,
+                    })}
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.program_application_form && (
+                    <small className="text-red-500">
+                      Link Form Pendaftaran harus diisi!
+                    </small>
+                  )}
+                </div>
+
+                <div>
+                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                    Link Template Berkas Pendaftaran{" "}
+                    <span className="text-[#7A5DDA]">*</span>
+                  </h1>
+                  <input
+                    {...register("program_registration_template", {
+                      required: true,
+                    })}
+                    placeholder="https://drive.google.com/ajesplisbuatporto"
+                    type="text"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                  />
+                  {errors.program_registration_template && (
+                    <small className="text-red-500">
+                      Link Template Berkas Pendaftaran harus diisi!
+                    </small>
+                  )}
                 </div>
               </div>
               {/*____________________________________________________ BARIS 12 _____________________________________________________________________ */}
@@ -327,10 +439,16 @@ No Hp :"
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
-                    placeholder="2023 & 2024"
+                    {...register("program_open_date", { required: true })}
                     type="date"
+                    min={minDate} // Prevents past dates
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.program_open_date && (
+                    <small className="text-red-500">
+                      Tanggal Buka Pendaftaran harus diisi!
+                    </small>
+                  )}
                 </div>
 
                 <div>
@@ -339,45 +457,68 @@ No Hp :"
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
-                    placeholder="https://drive.google.com/ajesplisbuatporto"
+                    {...register("program_close_date", { required: true })}
                     type="date"
+                    min={minDate} // Prevents past dates
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.program_close_date && (
+                    <small className="text-red-500">
+                      Tanggal Tutup Pendaftaran harus diisi!
+                    </small>
+                  )}
                 </div>
+
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Tanggal Pengumuman <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
-                    placeholder="https://drive.google.com/ajesplisbuatporto"
+                    {...register("program_announcement_date", {
+                      required: true,
+                    })}
                     type="date"
+                    min={minDate} // Prevents past dates
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.program_announcement_date && (
+                    <small className="text-red-500">
+                      Tanggal Pengumuman harus diisi!
+                    </small>
+                  )}
                 </div>
+
                 <div>
                   <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
                     Tanggal Rilis Website{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
-                    placeholder=""
+                    {...register("website_release_date", { required: true })}
                     type="date"
-                    min={minDate}
+                    min={minDate} // Prevents past dates
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
+                  {errors.website_release_date && (
+                    <small className="text-red-500">
+                      Tanggal Rilis Website harus diisi!
+                    </small>
+                  )}
                 </div>
               </div>
+
               {/*____________________________________________________ BUAT REQUEST _____________________________________________________________________ */}
-              <Link to="/">
-                <div className="mx-auto ">
-                  <button className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300">
-                    Buat Request
-                  </button>
-                </div>
-              </Link>
+              <div className="mx-auto ">
+                <button
+                  type="submit"
+                  className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300"
+                >
+                  Buat Request
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       {/* Footer */}
       <footer className="w-full bg-[#2B214C] p-6 md:p-10 text-white flex items-center justify-center z-10">
