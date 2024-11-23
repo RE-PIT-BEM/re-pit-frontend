@@ -31,7 +31,7 @@ const Request = () => {
 
         {/* Main Content */}
         <div className="flex-grow p-8">
-          <h1 className="text-2xl font-bold mb-4 mt-6 font-sansation text-white">
+          <h1 className="text-2xl font-bold mb-4 mt-8 lg:mt-4 font-sansation text-white">
             Halo, ajes!
           </h1>
 

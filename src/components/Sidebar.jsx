@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import rePIT from "../assets/rePIT.svg";
 import daftareq from "../assets/button/Daftareq.svg";
-import logout from "../assets/button/Logout.svg";
+import LogoutSVG from "../assets/button/Logout.svg";
 import reqbaru from "../assets/button/Reqbaru.svg";
+import useAuth from "../hooks/useAuth";
 
 const Sidebar = () => {
   const [activeLink, setActiveLink] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
+  const { logout } = useAuth();
 
   useEffect(() => {
     setActiveLink(location.pathname);
@@ -38,7 +40,7 @@ const Sidebar = () => {
   return (
     <div className="h-screen relative">
       {/* Header for Mobile */}
-      <div className="border-b-2 border-[#7A5DDA] lg:hidden flex items-center justify-between px-4 py-2 bg-home text-white fixed top-0 left-0 right-0 z-20">
+      <div className="border-b-2 border-[#7A5DDA] lg:hidden flex items-center justify-between px-4 py-2 bg-home text-white fixed top-0  left-0 right-0 z-20">
         <img
           src={rePIT}
           alt="rePIT Logo"
@@ -98,21 +100,19 @@ const Sidebar = () => {
         </nav>
 
         <div className="border-b-[1px] border-[#FFFFFF1A] mx-4 mt-6"></div>
-        <Link to="/">
-          <div className="mx-auto mt-8 ml-4 mr-4 mb-4">
-            <button
-              onClick={toggleSidebar}
-              className="flex items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white hover:shadow-[0_0_5px_0_#ffffff] duration-300"
-            >
-              <span>Logout</span>
-              <img
-                src={logout}
-                alt="Logout Icon"
-                className="ml-3 h-4 w-4 object-contain mr-2"
-              />
-            </button>
-          </div>
-        </Link>
+        <div className="mx-auto mt-8 ml-4 mr-4 mb-4">
+          <button
+            onClick={logout}
+            className="flex items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white hover:shadow-[0_0_5px_0_#ffffff] duration-300"
+          >
+            <span>Logout</span>
+            <img
+              src={LogoutSVG}
+              alt="Logout Icon"
+              className="ml-3 h-4 w-4 object-contain mr-2"
+            />
+          </button>
+        </div>
       </div>
 
       {/* Overlay for mobile */}

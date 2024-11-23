@@ -15,7 +15,7 @@ const useUserStore = create((set) => ({
   initializeUser: async () => {
     const token = getAccessToken();
     if (!token) {
-      set({ loading: false });
+      set({ user: null, isAuthenticated: false, loading: false });
       return;
     }
 
@@ -29,7 +29,7 @@ const useUserStore = create((set) => ({
       if (response.status === 200) {
         set({
           user: response.data.data.user,
-          isAuthenticated: false,
+          isAuthenticated: true,
           loading: false,
         });
       } else {

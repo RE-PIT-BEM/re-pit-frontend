@@ -12,31 +12,41 @@ import Reason from "./components/Reason.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "react-hot-toast";
 import WrapperApp from "./components/WrapperApp.jsx";
+import RequireAuth from "./components/RequireAuth.jsx";
+import OnlyGuest from "./components/OnlyGuest.jsx";
 
 // Create a client
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: "/home",
-    element: <Home />,
-  },
-  {
     path: "/",
     element: <App />,
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <OnlyGuest>
+        <Login />
+      </OnlyGuest>
+    ),
   },
 
   {
     path: "/request",
-    element: <Request />,
+    element: (
+      <RequireAuth>
+        <Request />
+      </RequireAuth>
+    ),
   },
   {
     path: "/daftar-request",
-    element: <DaftarRequest />,
+    element: (
+      <RequireAuth>
+        <DaftarRequest />
+      </RequireAuth>
+    ),
   },
   {
     path: "/reason",
@@ -47,10 +57,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <WrapperApp>
-        <Toaster position="bottom-right" reverseOrder={false} />
-        <RouterProvider router={router} />
-      </WrapperApp>
+      {/* <WrapperApp> */}
+      <Toaster position="bottom-right" reverseOrder={false} />
+      <RouterProvider router={router} />
+      {/* </WrapperApp> */}
     </QueryClientProvider>
   </React.StrictMode>
 );

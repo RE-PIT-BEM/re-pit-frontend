@@ -8,10 +8,8 @@ const Navbar = () => {
 
   const handleScroll = () => {
     if (window.scrollY > lastScrollY) {
-      // If scrolling down, hide navbar
       setShowNavbar(false);
     } else {
-      // If scrolling up, show navbar
       setShowNavbar(true);
     }
     setLastScrollY(window.scrollY);
@@ -29,15 +27,17 @@ const Navbar = () => {
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="h-8 rounded-md bg-transparent px-[76px]">
+        <div className="h-8 rounded-md bg-transparent px-0 md:px-[76px]">
           <button></button>
         </div>
-        <div className="flex h-[38px] my-8 select-none pointer-events-none">
-          <img src={rePIT} alt="" />
+
+        <div className="flex h-[30px] justify-start lg:h-[38px] my-8 logo-wrapper">
+          <img src={rePIT} alt="Logo" />
         </div>
+
         <div>
           <Link to="/login">
-            <button className="select-none font-sansation text-sm pb-1 h-[38px] rounded-md bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white px-[26px] py-[2px] mx-10 my-3 text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300">
+            <button className="select-none font-sansation text-sm  rounded-md bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white px-[26px] py-[7px] mx-10 my-3 text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300">
               Login
             </button>
           </Link>
