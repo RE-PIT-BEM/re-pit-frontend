@@ -7,7 +7,7 @@ import bem from "../assets/Bem.svg";
 import { Link } from "react-router-dom";
 import useUserStore from "../lib/userStore";
 
-const Request = () => {
+const DetailRequest = () => {
   const [today] = useState(() => {
     const currentDate = new Date();
     return currentDate.toISOString().split("T")[0];
@@ -367,14 +367,43 @@ No Hp :"
                   />
                 </div>
               </div>
-              {/*____________________________________________________ BUAT REQUEST _____________________________________________________________________ */}
+              {/*____________________________________________________ EDIT REQUEST _____________________________________________________________________ */}
               <Link to="/">
                 <div className="mx-auto ">
                   <button className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300">
-                    Buat Request
+                    Edit Request
                   </button>
                 </div>
               </Link>
+
+              {/*____________________________________________________ ADMIN VIEW _____________________________________________________________________ */}
+              <Link to="/">
+                <div className="mx-auto hidden ">
+                  <button className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300">
+                    Edit Request
+                  </button>
+                </div>
+              </Link>
+              <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 pb-10">
+                <Link to="/">
+                  <div className="mx-auto ">
+                    <button className="w-full h-full bg-error py-2 rounded-md text-[18px] font-bold text-white">
+                      Tolak
+                    </button>
+                  </div>
+                </Link>
+                <Link to="/">
+                  <div className="mx-auto ">
+                    <button
+                      className="w-full h-full bg-sukses 
+                     py-2 rounded-md text-[18px] font-bold text-white duration-300"
+                    >
+                      Terima
+                    </button>
+                  </div>
+                </Link>
+              </div>
+              {/*____________________________________________________ ADMIN VIEW _____________________________________________________________________ */}
             </div>
           </div>
         </div>
@@ -403,4 +432,4 @@ No Hp :"
   );
 };
 
-export default Request;
+export default DetailRequest;

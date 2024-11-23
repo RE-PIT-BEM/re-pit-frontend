@@ -7,13 +7,13 @@ import Home from "./view/Home.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Login from "./components/Login.jsx";
 import Request from "./view/Request.jsx";
-import DaftarRequest from "./view/DaftarRequest.jsx";
 import Reason from "./components/Reason.jsx";
+import DaftarRequest from "./view/DaftarRequest.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Toaster } from "react-hot-toast";
-import WrapperApp from "./components/WrapperApp.jsx";
 import RequireAuth from "./components/RequireAuth.jsx";
 import OnlyGuest from "./components/OnlyGuest.jsx";
+import DetailRequest from "./view/DetailRequest.jsx";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -49,8 +49,8 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/reason",
-    element: <Reason />,
+    path: "/edit-request",
+    element: <DetailRequest />,
   },
 ]);
 

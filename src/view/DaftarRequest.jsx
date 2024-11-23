@@ -54,7 +54,7 @@ const Request = () => {
               <div></div>
               <div></div>
               <div>
-                <Link to="/">
+                <Link to="/edit-request">
                   <div className="">
                     <button className=" items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
                       Detail
@@ -102,7 +102,7 @@ const Request = () => {
               <div></div>
               <div></div>
               <div>
-                <Link to="/">
+                <Link to="/edit-request">
                   <div className="">
                     <button className=" items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
                       Detail
@@ -146,7 +146,7 @@ const Request = () => {
               <div></div>
               <div></div>
               <div>
-                <Link to="/">
+                <Link to="/edit-request">
                   <div className="items-start lg:items-end">
                     <button className=" items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
                       Detail
