@@ -1,8 +1,8 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
-import logo from "../assets/Logo.svg";
-import bem from "../assets/Bem.svg";
-import error from "../assets/Error.svg";
+import logo from "../assets/logo.svg";
+import bem from "../assets/bem.svg";
+import error from "../assets/error.svg";
 import { Link } from "react-router-dom";
 
 const Request = () => {

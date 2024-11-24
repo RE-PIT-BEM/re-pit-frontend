@@ -1,13 +1,13 @@
 import React from "react";
 import polygonHome from "../assets/polygonHome.svg";
 import Navbar from "../components/Navbar";
-import logo from "../assets/Logo.svg";
-import bem from "../assets/Bem.svg";
-import karakter from "../assets/Karakter.svg";
+import logo from "../assets/logo.svg";
+import bem from "../assets/bem.svg";
+import karakter from "../assets/karakter.svg";
 import landingPage from "../assets/landingPage.svg";
-import dafa from "../assets/Dafa.svg";
-import jevon from "../assets/Jevon.svg";
-import ajes from "../assets/Ajes.svg";
+import dafa from "../assets/dafa.svg";
+import jevon from "../assets/jevon.svg";
+import ajes from "../assets/ajes.svg";
 import { Link } from "react-router-dom";
 
 const Home = () => {
