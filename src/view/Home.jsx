@@ -16,7 +16,7 @@ const Home = () => {
       <div className="min-h-screen flex flex-col">
         <Navbar />
 
-        <div className="bg-home min-h-screen flex flex-col items-center justify-center">
+        <div className="bg-home min-h-screen flex flex-grow flex-col items-center justify-center">
           <div
             className="bg-cover bg-center w-full min-h-screen"
             style={{

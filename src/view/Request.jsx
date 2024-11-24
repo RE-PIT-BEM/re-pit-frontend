@@ -28,8 +28,8 @@ const Request = () => {
 
   const [minDate] = useState(() => {
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 8); // Tambahkan 8 hari dari hari ini
-    return currentDate.toISOString().split("T")[0]; // Format ke YYYY-MM-DD
+    currentDate.setDate(currentDate.getDate() + 10);
+    return currentDate.toISOString().split("T")[0];
   });
 
   const mutationAddReq = useMutation((data) => {
@@ -87,7 +87,7 @@ const Request = () => {
 
         {/* Main Content */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex-grow p-8">
-          <h1 className="text-2xl font-bold mb-4 mt-8 lg:mt-4 font-sansation text-white">
+          <h1 className="text-2xl font-bold mb-4 mt-10 lg:mt-4 font-sansation text-white">
             Halo, ajes!
           </h1>
 
@@ -99,14 +99,14 @@ const Request = () => {
             </h1>
 
             <div className="m-4 p-5">
-              <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+              <h1 className="mt-3 font-bold font-sansation text-white">
                 Nama Program Kerja <span className="text-[#7A5DDA]">*</span>
               </h1>
               <input
                 {...register("program_name", { required: true })}
                 placeholder="FILAFEST"
                 type="text"
-                className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
               />
               {errors.program_name && (
                 <small className="text-red-500">
@@ -116,7 +116,7 @@ const Request = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Kementrian / Kebiroan{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -124,17 +124,17 @@ const Request = () => {
                     {...register("department", { required: true })}
                     placeholder="PIT"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
                   />
                   {errors.department && (
-                    <small className="text-red-500">
+                    <small className="text-red-500 ">
                       Kementrian / Kebiroan harus diisi!
                     </small>
                   )}
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Link Grup Koordinasi Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -154,7 +154,7 @@ const Request = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Nama PJ Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -170,7 +170,7 @@ const Request = () => {
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Kontak PJ Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -189,7 +189,7 @@ const Request = () => {
               </div>
 
               {/*____________________________________________________ BARIS 4-7 _____________________________________________________________________ */}
-              <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+              <h1 className=" mt-3 font-bold font-sansation text-white">
                 Deskripsi Proker <span className="text-[#7A5DDA]">*</span>
               </h1>
               <textarea
@@ -207,7 +207,7 @@ const Request = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Timeline Proker <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
@@ -231,7 +231,7 @@ const Request = () => {
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Timeline Extend
                   </h1>
                   <textarea
@@ -247,7 +247,7 @@ const Request = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Foto Kegiatan Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -265,7 +265,7 @@ const Request = () => {
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Logo Proker / Event{" "}
                   </h1>
                   <input
@@ -279,7 +279,7 @@ const Request = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Pilihan Divisi <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
@@ -302,7 +302,7 @@ const Request = () => {
               {/* Baris 8 */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Pesan Ketika Diterima{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -327,7 +327,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Pesan Ketika Ditolak{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -349,7 +349,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Quotes <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
@@ -366,7 +366,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Alur Pendaftaran <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
@@ -392,7 +392,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Link Form Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -412,7 +412,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Link Template Berkas Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -434,7 +434,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
               {/*____________________________________________________ BARIS 12 _____________________________________________________________________ */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-20">
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Tanggal Buka Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -452,7 +452,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Tanggal Tutup Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -470,7 +470,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Tanggal Pengumuman <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
@@ -489,7 +489,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className="ml-2 mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-3 font-bold font-sansation text-white">
                     Tanggal Rilis Website{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
