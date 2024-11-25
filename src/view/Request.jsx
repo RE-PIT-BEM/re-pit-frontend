@@ -65,7 +65,8 @@ const Request = () => {
         // An error happened!
         console.log(`error: `, error);
         const errorMessage = error.response.data.messages;
-        toast.error(errorMessage);
+        const errorMessage2 = error.response.data.errorMessage;
+        toast.error(errorMessage ?? errorMessage2);
       },
       onSuccess: (data, variables, context) => {
         const message = data.data.message;
@@ -77,7 +78,7 @@ const Request = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-home flex flex-col">
+    <div className="relative min-h-screen bg-home flex flex-col flex-grow max-w-screen">
       {" "}
       <div className="flex flex-grow">
         {/* Sidebar */}
@@ -87,7 +88,7 @@ const Request = () => {
 
         {/* Main Content */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex-grow p-8">
-          <h1 className="text-2xl font-bold mb-4 mt-10 lg:mt-4 font-sansation text-white">
+          <h1 className="text-2xl font-bold mt-8 lg:mt-4 mb-4 lg:mb-6 font-sansation text-white">
             Halo, ajes!
           </h1>
 
@@ -98,15 +99,15 @@ const Request = () => {
               Request Baru
             </h1>
 
-            <div className="m-4 p-5">
-              <h1 className="mt-3 font-bold font-sansation text-white">
+            <div className="m-4 p-2 lg:p-5">
+              <h1 className="mt-5 font-bold font-sansation text-white">
                 Nama Program Kerja <span className="text-[#7A5DDA]">*</span>
               </h1>
               <input
                 {...register("program_name", { required: true })}
                 placeholder="FILAFEST"
                 type="text"
-                className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
               />
               {errors.program_name && (
                 <small className="text-red-500">
@@ -114,47 +115,64 @@ const Request = () => {
                 </small>
               )}
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 ">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 ">
                 <div>
-                  <h1 className=" mt-5 font-bold font-sansation text-white">
-                    Kementrian / Kebiroan{" "}
+                  <h1 className="mt-4 font-bold font-sansation text-white text-lg">
+                    Kementrian/Kebiroan
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
-                  <input
+                  <select
                     {...register("department", { required: true })}
-                    placeholder="PIT"
-                    type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
-                  />
+                    className="w-full bg-transparent text-white border border-neutral-400 hover:bg-home hover:border-[#7A5DDA] py-3 px-2 mt-2 rounded-[5px]"
+                  >
+                    <option value="" disabled selected>
+                      Pilih Kementrian / Kebiroan
+                    </option>
+                    <option value="PIT">PIT</option>
+                    <option value="KASTRAT">KASTRAT</option>
+                    <option value="EKRAF">EKRAF</option>
+                    <option value="KMB">KMB</option>
+                    <option value="ADKEU">ADKEU</option>
+                    <option value="MEDINKRAF">MEDINKRAF</option>
+                    <option value="SOSLING">SOSLING</option>
+                    <option value="PSDM">PSDM</option>
+                    <option value="ADVOKESMA">ADVOKESMA</option>
+                    {/* Tambahkan lebih banyak opsi sesuai kebutuhan */}
+                  </select>
                   {errors.department && (
-                    <small className="text-red-500 ">
+                    <small className="text-red-500">
                       Kementrian / Kebiroan harus diisi!
                     </small>
                   )}
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className="mt-5 font-bold font-sansation text-white">
                     Link Grup Koordinasi Proker / Event{" "}
-                    <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
-                    {...register("group_link", { required: true })}
+                    {...register("group_link", {
+                      required: "Link harus diisi!",
+                      pattern: {
+                        value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
+                        message: "Link tidak valid!",
+                      },
+                    })}
                     placeholder="https://waa.wwa/88080"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.group_link && (
                     <small className="text-red-500">
-                      Link Grup Koordinasi harus diisi!
+                      {errors.group_link.message}
                     </small>
                   )}
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8  lg:pb-28">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Nama PJ Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -162,7 +180,7 @@ const Request = () => {
                     {...register("contact_name", { required: true })}
                     placeholder="Ajes"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.contact_name && (
                     <small className="text-red-500">Nama PJ harus diisi!</small>
@@ -170,7 +188,7 @@ const Request = () => {
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Kontak PJ Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -178,7 +196,7 @@ const Request = () => {
                     {...register("contact_info", { required: true })}
                     placeholder="081246091171"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.contact_info && (
                     <small className="text-red-500">
@@ -189,13 +207,13 @@ const Request = () => {
               </div>
 
               {/*____________________________________________________ BARIS 4-7 _____________________________________________________________________ */}
-              <h1 className=" mt-3 font-bold font-sansation text-white">
+              <h1 className=" mt-16 lg:mt-5 font-bold font-sansation text-white">
                 Deskripsi Proker <span className="text-[#7A5DDA]">*</span>
               </h1>
               <textarea
                 {...register("program_description", { required: true })}
                 placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus."
-                className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white placeholder:text-left placeholder:top-0"
+                className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white placeholder:text-left placeholder:top-0"
                 rows="6"
                 style={{ resize: "none" }}
               />
@@ -205,9 +223,9 @@ const Request = () => {
                 </small>
               )}
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Timeline Proker <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
@@ -219,7 +237,7 @@ const Request = () => {
             - FnP: 29 Maret - 31 Maret (daring)
             - Pengumuman: 2 April"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
@@ -231,62 +249,68 @@ const Request = () => {
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Timeline Extend
                   </h1>
                   <textarea
                     {...register("program_timeline_extend")}
                     placeholder="info info"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Foto Kegiatan Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
-                    {...register("program_photo_url", { required: true })}
+                    {...register("program_photo_url", {
+                      required: "Link harus diisi!",
+                      pattern: {
+                        value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
+                        message: "Link tidak valid!",
+                      },
+                    })}
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.program_photo_url && (
                     <small className="text-red-500">
-                      Foto Kegiatan harus diisi!
+                      {errors.program_photo_url.message}
                     </small>
                   )}
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Logo Proker / Event{" "}
                   </h1>
                   <input
                     {...register("program_logo_url")}
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 lg:pb-28">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Pilihan Divisi <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
                     {...register("program_division", { required: true })}
                     placeholder="DDM, Humas, Acara"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.program_division && (
                     <small className="text-red-500">
@@ -300,9 +324,9 @@ const Request = () => {
 
               {/*____________________________________________________ BARIS 8-11 _____________________________________________________________________ */}
               {/* Baris 8 */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-16 lg:mt-5 font-bold font-sansation text-white">
                     Pesan Ketika Diterima{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -315,7 +339,7 @@ Silahkan simak pengumuman di bawah ini:
 Silahkan gabung grup berikut:
 https://line.me/ti/AjEsbuaTp0rtoYUK"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
@@ -327,7 +351,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Pesan Ketika Ditolak{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -335,7 +359,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     {...register("rejection_message", { required: true })}
                     placeholder="yahahhahaa ditolak "
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
@@ -347,16 +371,16 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Quotes <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
                     {...register("program_quotes", { required: true })}
                     placeholder="“Porto nomor sekian, UKM hindu yang utama” - Ajes"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
@@ -366,7 +390,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Alur Pendaftaran <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <textarea
@@ -378,7 +402,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
 3. ....
 4. .... "
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     rows="6"
                     style={{ resize: "none" }}
                   />
@@ -390,51 +414,59 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-28">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 lg:pb-28">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Link Form Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
                     {...register("program_application_form", {
-                      required: true,
+                      required: "Link harus diisi!",
+                      pattern: {
+                        value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
+                        message: "Link tidak valid!",
+                      },
                     })}
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.program_application_form && (
                     <small className="text-red-500">
-                      Link Form Pendaftaran harus diisi!
+                      {errors.program_application_form.message}
                     </small>
                   )}
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Link Template Berkas Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
                     {...register("program_registration_template", {
-                      required: true,
+                      required: "Link harus diisi!",
+                      pattern: {
+                        value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
+                        message: "Link tidak valid!",
+                      },
                     })}
                     placeholder="https://drive.google.com/ajesplisbuatporto"
                     type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.program_registration_template && (
                     <small className="text-red-500">
-                      Link Template Berkas Pendaftaran harus diisi!
+                      {errors.program_registration_template.message}
                     </small>
                   )}
                 </div>
               </div>
               {/*____________________________________________________ BARIS 12 _____________________________________________________________________ */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-20">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 lg:pb-20">
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-16 lg:mt-5 font-bold font-sansation text-white">
                     Tanggal Buka Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -442,8 +474,9 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     {...register("program_open_date", { required: true })}
                     type="date"
                     min={minDate} // Prevents past dates
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-gray-500 text-white"
                   />
+
                   {errors.program_open_date && (
                     <small className="text-red-500">
                       Tanggal Buka Pendaftaran harus diisi!
@@ -452,7 +485,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Tanggal Tutup Pendaftaran{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -460,7 +493,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     {...register("program_close_date", { required: true })}
                     type="date"
                     min={minDate} // Prevents past dates
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.program_close_date && (
                     <small className="text-red-500">
@@ -470,7 +503,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Tanggal Pengumuman <span className="text-[#7A5DDA]">*</span>
                   </h1>
                   <input
@@ -479,7 +512,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     })}
                     type="date"
                     min={minDate} // Prevents past dates
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.program_announcement_date && (
                     <small className="text-red-500">
@@ -489,7 +522,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className=" mt-3 font-bold font-sansation text-white">
+                  <h1 className=" mt-5 font-bold font-sansation text-white">
                     Tanggal Rilis Website{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
@@ -497,7 +530,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     {...register("website_release_date", { required: true })}
                     type="date"
                     min={minDate} // Prevents past dates
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 mb-4 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] focus:text-white"
+                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                   />
                   {errors.website_release_date && (
                     <small className="text-red-500">
@@ -508,22 +541,24 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
               </div>
 
               {/*____________________________________________________ BUAT REQUEST _____________________________________________________________________ */}
-              <div className="mx-auto ">
+              <div className="mx-auto mt-16 lg:mt-0 ">
                 <button
                   type="submit"
-                  className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300"
+                  className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA] hover:shadow-[0_0_5px_0_#7A5DDA] duration-300"
                 >
                   Buat Request
                 </button>
               </div>
+              
             </div>
           </div>
         </form>
+        
       </div>
       {/* Footer */}
       <footer className="w-full bg-[#2B214C] p-6 md:p-10 text-white flex items-center justify-center z-10">
         <div className="flex flex-col items-center">
-          <div className="flex space-x-4 mb-4">
+          <div className="flex space-x-4">
             <img
               src={bem}
               alt="BEM Logo"

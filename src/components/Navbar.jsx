@@ -27,11 +27,11 @@ const Navbar = () => {
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="h-8 rounded-md bg-transparent px-0 md:px-[76px]">
+        <div className="lg:px-[24px]  md:-mx-44 py-[7px] px-0 lg:mx-16 -ml-4 my-3 h-8 rounded-md bg-transparent ">
           <button></button>
         </div>
 
-        <div className="flex h-[30px] justify-start lg:h-[38px] my-8 logo-wrapper">
+        <div className="flex h-[32px] justify-start lg:h-[38px]   my-8 logo-wrapper">
           <img src={rePIT} alt="Logo" />
         </div>
 
