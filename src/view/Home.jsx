@@ -105,7 +105,7 @@ const Home = () => {
               {/* SECTION 2 */}
               <div
                 className={`grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-10 items-center mt-[150px] xl:mt-[300px] justify-items-center px-4 lg:px-0 ${
-                  isAnimated ? "animate-slide-in" : ""
+                  isAnimated ? "animate-slide-out" : ""
                 }`}
               >
                 <div className="flex justify-center order-1 lg:order-1">

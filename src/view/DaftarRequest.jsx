@@ -10,12 +10,10 @@ const Request = () => {
     <div className="relative min-h-screen bg-home flex flex-col">
       {" "}
       <div className="flex flex-grow">
-        {/* Sidebar */}
-        <div className="w-0 lg:w-64">
+        <div className="w-0 md:w-0 lg:w-96 xl:w-64">
           <Sidebar />
         </div>
 
-        {/* Main Content */}
         <div className="flex-grow p-8">
           <h1 className="text-2xl font-bold mt-8 lg:mt-4 mb-4 lg:mb-6  font-sansation text-white">
             Halo, Ajes!
@@ -23,23 +21,23 @@ const Request = () => {
           {/* REQUEST 1 */}
           <div className="border rounded-[15px] border-[#7A5DDA] p-6">
             <div className="grid grid-cols-1 lg:grid-cols-2">
-              <h1 className="font-sansation pb-4 font-bold text-start text-[24px] bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent">
+              <h1 className="font-sansation lg:pb-4 font-bold text-start text-[24px] bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent">
                 Tes User Yang Ini
               </h1>
-              <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-sukses flex items-center justify-start lg:justify-end ">
+              <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-sukses flex items-center justify-start lg:justify-end">
                 Accepted
               </h1>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-8  text-left  text-white">
+            <div className="grid grid-cols-2 md:grid-cols-6 xl:grid-cols-8 text-left gap-4 md:gap-0 text-white">
               <div>
                 <h1 className="text-[12px]">TANGGAL DIBUKA</h1>
-                <h1 className="font-bold text-[16px] mt-2 ">25 Des 2024</h1>
+                <h1 className="font-bold text-[16px] mt-2">25 Des 2024</h1>
               </div>
 
               <div>
                 <h1 className="ml-6 text-[12px]">NAMA PJ</h1>
-                <h1 className="ml-6 text-[16px] mt-2">Ajes</h1>
+                <h1 className="ml-6 font-bold text-[16px] mt-2">Ajes</h1>
               </div>
 
               <div>
@@ -47,16 +45,16 @@ const Request = () => {
                 <h1 className="font-bold text-[16px] mt-2">081246091171</h1>
               </div>
               <div>
-                <h1 className="ml-5 text-[12px]">KEMENBIRO</h1>
-                <h1 className="ml-5 font-bold text-[16px] mt-2">PIT</h1>
+                <h1 className="ml-6 text-[12px]">KEMENBIRO</h1>
+                <h1 className="ml-6 font-bold text-[16px] mt-2">PIT</h1>
               </div>
-              <div></div>
-              <div></div>
-              <div></div>
+              <div className="hidden md:block"></div>
+              <div className="hidden xl:block"></div>
+              <div className="hidden xl:block"></div>
               <div>
                 <Link to="/edit-request">
-                  <div className="">
-                    <button className=" items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
+                  <div className="flex justify-start md:justify-end">
+                    <button className=" px-12 py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
                       Detail
                     </button>
                   </div>
@@ -68,7 +66,7 @@ const Request = () => {
           {/* REQUEST 2 */}
           <div className="border rounded-[15px] border-[#7A5DDA] p-6 mt-4">
             <div className="grid grid-cols-1 lg:grid-cols-2">
-              <h1 className="font-sansation pb-4 font-bold text-start text-[24px] bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent">
+              <h1 className="font-sansation lg:pb-4 font-bold text-start text-[24px] bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent">
                 Tes Admin Yang Ini
               </h1>
               <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-error flex items-center justify-start lg:justify-end ">
@@ -79,7 +77,7 @@ const Request = () => {
               </h1>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-8  text-left  text-white">
+            <div className="grid grid-cols-2  md:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-0 text-left  text-white">
               <div>
                 <h1 className="text-[12px]">TANGGAL DIBUKA</h1>
                 <h1 className="font-bold text-[16px] mt-2 ">25 Des 2024</h1>
@@ -87,7 +85,7 @@ const Request = () => {
 
               <div>
                 <h1 className="ml-6 text-[12px]">NAMA PJ</h1>
-                <h1 className="ml-6 text-[16px] mt-2">Ajes</h1>
+                <h1 className="ml-6 font-bold  text-[16px] mt-2">Ajes</h1>
               </div>
 
               <div>
@@ -95,16 +93,17 @@ const Request = () => {
                 <h1 className="font-bold text-[16px] mt-2">081246091171</h1>
               </div>
               <div>
-                <h1 className="ml-5 text-[12px]">KEMENBIRO</h1>
-                <h1 className="ml-5 font-bold text-[16px] mt-2">PIT</h1>
+                <h1 className="ml-6 text-[12px]">KEMENBIRO</h1>
+                <h1 className="ml-6 font-bold text-[16px] mt-2">PIT</h1>
               </div>
-              <div></div>
-              <div></div>
-              <div></div>
+              <div className="hidden md:block"></div>
+              <div className="hidden xl:block"></div>
+              <div className="hidden xl:block"></div>
+
               <div>
                 <Link to="/edit-request">
-                  <div className="">
-                    <button className=" items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
+                  <div className="flex justify-start md:justify-end">
+                    <button className="px-12 py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
                       Detail
                     </button>
                   </div>
@@ -115,7 +114,7 @@ const Request = () => {
           {/* REQUEST 3 */}
           <div className="border rounded-[15px] border-[#7A5DDA] p-6 mt-4">
             <div className="grid grid-cols-1 lg:grid-cols-2">
-              <h1 className="font-sansation pb-4 font-bold text-start text-[24px] bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent">
+              <h1 className="font-sansation lg:pb-4 font-bold text-start text-[24px] bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent">
                 Open Recruitment Staf Muda BEM FILKOM 2024
               </h1>
               <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-warning flex items-center justify-start lg:justify-end ">
@@ -123,7 +122,7 @@ const Request = () => {
               </h1>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-8   text-left  text-white">
+            <div className="grid grid-cols-2 md:grid-cols-6 xl:grid-cols-8 gap-4 md:gap-0  text-left  text-white">
               <div>
                 <h1 className="text-[12px]">TANGGAL DIBUKA</h1>
                 <h1 className="font-bold text-[16px] mt-2 ">25 Des 2024</h1>
@@ -131,7 +130,7 @@ const Request = () => {
 
               <div>
                 <h1 className="ml-6 text-[12px]">NAMA PJ</h1>
-                <h1 className="ml-6 text-[16px] mt-2">Ajes</h1>
+                <h1 className="ml-6 font-bold text-[16px] mt-2">Ajes</h1>
               </div>
 
               <div>
@@ -139,16 +138,17 @@ const Request = () => {
                 <h1 className="font-bold text-[16px] mt-2">081246091171</h1>
               </div>
               <div>
-                <h1 className="ml-5 text-[12px]">KEMENBIRO</h1>
-                <h1 className="ml-5 font-bold text-[16px] mt-2">PIT</h1>
+                <h1 className="ml-6 text-[12px]">KEMENBIRO</h1>
+                <h1 className="ml-6 font-bold text-[16px] mt-2">PIT</h1>
               </div>
-              <div></div>
-              <div></div>
-              <div></div>
+              <div className="hidden md:block"></div>
+              <div className="hidden xl:block"></div>
+              <div className="hidden xl:block"></div>
+
               <div>
                 <Link to="/edit-request">
-                  <div className="items-start lg:items-end">
-                    <button className=" items-center justify-center w-full py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
+                  <div className="flex justify-start md:justify-end">
+                    <button className=" px-12 py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
                       Detail
                     </button>
                   </div>
