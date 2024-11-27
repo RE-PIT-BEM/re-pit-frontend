@@ -91,7 +91,7 @@ const Request = () => {
                   <div className="hidden xl:block"></div>
                   <div className="hidden xl:block"></div>
                   <div>
-                    <Link to="/edit-request">
+                    <Link to={`/request/${request.id}`}>
                       <div className="flex justify-start md:justify-end">
                         <button className=" px-12 py-[6px] border-2 border-[#7A5DDA] hover:border-[#ffffff] rounded-md text-[14px] text-white duration-300">
                           Detail

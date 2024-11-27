@@ -30,7 +30,7 @@ const Request = () => {
 
   const [minDate] = useState(() => {
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 10);
+    currentDate.setDate(currentDate.getDate() + 8);
     return currentDate.toISOString().split("T")[0];
   });
 
