@@ -11,6 +11,8 @@ import { getAccessToken } from "../lib/tokenUtils";
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import api from "../lib/api";
+import useAuth from "../hooks/useAuth";
+import { Navigate } from "react-router-dom";
 
 const Request = () => {
   const {
@@ -72,10 +74,14 @@ const Request = () => {
         const message = data.data.message;
         reset();
         toast.success(message);
-        navigate("/daftar-request");
+        Navigate({
+          to: "/daftar-request",
+        });
       },
     });
   };
+
+  const { user } = useAuth();
 
   return (
     <div className="relative min-h-screen bg-home flex flex-col flex-grow max-w-screen">
@@ -89,7 +95,7 @@ const Request = () => {
         {/* Main Content */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex-grow p-8">
           <h1 className="text-2xl font-bold mt-8 lg:mt-4 mb-4 lg:mb-6 font-sansation text-white">
-            Halo, ajes!
+            Halo, {user.name} dari {user.department}!
           </h1>
 
           <div className="border rounded-[15px] border-1 border-[#7A5DDA]">
@@ -417,21 +423,24 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
               <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 lg:pb-28">
                 <div>
                   <h1 className=" mt-5 font-bold font-sansation text-white">
-                    Link Form Pendaftaran{" "}
+                    Data yang dibutuhkan Proker / Event{" "}
                     <span className="text-[#7A5DDA]">*</span>
                   </h1>
-                  <input
-                    {...register("program_application_form", {
-                      required: "Link harus diisi!",
-                      pattern: {
-                        value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
-                        message: "Link tidak valid!",
-                      },
-                    })}
-                    placeholder="https://drive.google.com/ajesplisbuatporto"
-                    type="text"
+                  <textarea
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
-                  />
+                    rows="6"
+                    style={{ resize: "none" }}
+                    placeholder="Nama Lengkap : 
+Nama Panggilan :
+Prodi :
+Tempat, tanggal Lahir :
+No Hp :
+...."
+                    {...register("program_application_form", {
+                      required:
+                        "Data yang dibutuhkan Proker / Event harus diisi!",
+                    })}
+                  ></textarea>
                   {errors.program_application_form && (
                     <small className="text-red-500">
                       {errors.program_application_form.message}
@@ -440,27 +449,49 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                 </div>
 
                 <div>
-                  <h1 className=" mt-5 font-bold font-sansation text-white">
-                    Link Template Berkas Pendaftaran{" "}
-                    <span className="text-[#7A5DDA]">*</span>
-                  </h1>
-                  <input
-                    {...register("program_registration_template", {
-                      required: "Link harus diisi!",
-                      pattern: {
-                        value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
-                        message: "Link tidak valid!",
-                      },
-                    })}
-                    placeholder="https://drive.google.com/ajesplisbuatporto"
-                    type="text"
-                    className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
-                  />
-                  {errors.program_registration_template && (
-                    <small className="text-red-500">
-                      {errors.program_registration_template.message}
-                    </small>
-                  )}
+                  <div>
+                    <h1 className=" mt-5 font-bold font-sansation text-white">
+                      Angkatan yang bisa mendaftar{" "}
+                      <span className="text-[#7A5DDA]">*</span>
+                    </h1>
+                    <input
+                      {...register("accepted_batch", {
+                        required: "Wajib Diisi!",
+                      })}
+                      placeholder="2023 & 2024"
+                      type="text"
+                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                    />
+                    {errors.accepted_batch && (
+                      <small className="text-red-500">
+                        {errors.accepted_batch.message}
+                      </small>
+                    )}
+                  </div>
+
+                  <div>
+                    <h1 className=" mt-5 font-bold font-sansation text-white">
+                      Link Template Berkas Pendaftaran{" "}
+                      <span className="text-[#7A5DDA]">*</span>
+                    </h1>
+                    <input
+                      {...register("program_registration_template", {
+                        required: "Link harus diisi!",
+                        pattern: {
+                          value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
+                          message: "Link tidak valid!",
+                        },
+                      })}
+                      placeholder="https://drive.google.com/ajesplisbuatporto"
+                      type="text"
+                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                    />
+                    {errors.program_registration_template && (
+                      <small className="text-red-500">
+                        {errors.program_registration_template.message}
+                      </small>
+                    )}
+                  </div>
                 </div>
               </div>
               {/*____________________________________________________ BARIS 12 _____________________________________________________________________ */}
@@ -549,11 +580,9 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                   Buat Request
                 </button>
               </div>
-              
             </div>
           </div>
         </form>
-        
       </div>
       {/* Footer */}
       <footer className="w-full bg-[#2B214C] p-6 md:p-10 text-white flex items-center justify-center z-10">
