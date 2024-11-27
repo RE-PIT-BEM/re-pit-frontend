@@ -40,7 +40,7 @@ const Sidebar = () => {
   return (
     <div className="h-screen relative">
       {/* Header for Mobile */}
-      <div className="border-b-2 border-[#7A5DDA] lg:hidden flex items-center justify-between px-4 py-2 bg-home text-white fixed top-0  left-0 right-0 z-20">
+      <div className="border-b-2 border-[#7A5DDA] lg:hidden flex items-center justify-between px-4 py-2 bg-home text-white fixed top-0 left-0 right-0 z-50">
         <img
           src={rePIT}
           alt="rePIT Logo"
@@ -58,7 +58,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 w-full lg:w-64 lg:h-screen bg-[#151618] text-white transform transition-transform duration-300 ease-in-out z-10 ${
+        className={`fixed lg:relative top-0 left-0 w-full lg:w-64 lg:h-screen bg-[#151618] text-white transform transition-transform duration-300 ease-in-out z-10 ${
           isSidebarOpen ? "translate-y-0" : "-translate-y-full"
         } lg:translate-y-0 lg:transform-none`}
       >

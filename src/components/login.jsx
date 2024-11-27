@@ -45,7 +45,7 @@ const Login = () => {
       style={{ backgroundImage: `url(${polygonHome})` }}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className=" lg:w-4/12 lg:py-16 bg-[#151618] mx-auto py-4 rounded-xl pl-16 pr-16">
+      <div className=" xl:w-4/12 lg:w-6/12 md:w-7/12 md:py-12 lg:py-14 xl:py-16 bg-[#151618] mx-auto py-4 rounded-xl pl-16 pr-16">
         <h1 className="w-fit mx-auto bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent text-[26px] font-bold font-sansation mt-8">
           Login
         </h1>
@@ -57,7 +57,7 @@ const Login = () => {
         <input
           placeholder="NIM"
           type="text"
-          className="mt-2 block w-56 lg:w-full bg-gray-100 border bg-transparent border-[#E6E6E6] placeholder:px-1 py-3 lg:py-4 px-3 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F]"
+          className="mt-2 block w-56 md:w-full lg:w-full bg-gray-100 border bg-transparent border-[#E6E6E6] placeholder:px-1 py-3 lg:py-4 px-3 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F]"
           {...register("nim", { required: true })}
         />
         {errors.nim && <small className="text-error">NIM harus diisi!</small>}
@@ -66,7 +66,7 @@ const Login = () => {
         <input
           placeholder="Password"
           type="password"
-          className="mt-2 block w-56 lg:w-full bg-gray-100 border bg-transparent border-[#E6E6E6] placeholder:px-1 py-3 lg:py-4 px-3 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F]"
+          className="mt-2 block w-56 md:w-full lg:w-full bg-gray-100 border bg-transparent border-[#E6E6E6] placeholder:px-1 py-3 lg:py-4 px-3 rounded-[10px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F]"
           {...register("password", { required: true })}
         />
         {errors.password && (
