@@ -43,7 +43,7 @@ const Home = () => {
 
               {/* Landing Page Description */}
               <div
-                className={`select-none w-fit text-white text-lg text-center px-12 sm:px-[150px] md:px-[100px] lg:px-[250px] xl:px-[450px] lg:-mt-4 mt-4 ${
+                className={`select-none w-fit text-white text-lg text-center px-[22px] sm:px-[150px] md:px-[100px] lg:px-[250px] xl:px-[450px] lg:-mt-4 mt-4 ${
                   isAnimated ? "animate-fade-in" : ""
                 }`}
               >
@@ -54,7 +54,7 @@ const Home = () => {
               {/* Call-to-Action Button */}
               <div className={`w-fit ${isAnimated ? "animate-fade-in" : ""}`}>
                 <Link to="/login">
-                  <button className="select-none font-sansation text-sm rounded-lg bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white px-5 py-1 sm:px-6 md:px-7 lg:px-8 lg:py-2 text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300 mt-4 lg:mt-0">
+                  <button className="select-none font-sansation text-sm rounded-lg bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white px-8 py-2 sm:px-6 md:px-7 lg:px-8 lg:py-2 text-white hover:text-[#7A5DDA] hover:shadow-[0_0_10px_0_#7A5DDA] duration-300 mt-4 lg:mt-0">
                     Request
                   </button>
                 </Link>
@@ -79,7 +79,7 @@ const Home = () => {
                   <h1 className="text-center xl:pl-44 text-4xl sm:text-3xl md:text-4xl lg:text-4xl font-sansation bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent font-bold">
                     RE-PIT
                   </h1>
-                  <p className="text-justify mt-4 lg:px-14 xl:pl-44 px-4 xl:px-0 sm:px-6 md:px-10">
+                  <p className="text-justify mt-4 lg:px-14 xl:pl-44 px-4 xl:px-0 sm:px-6 md:px-10 text-[16px]">
                     RE-PIT adalah platform request Web Event yang dikembangkan
                     oleh Kebiroan PIT BEM FILKOM UB untuk memfasilitasi
                     pengajuan, pengelolaan, dan konfirmasi event secara
@@ -120,7 +120,7 @@ const Home = () => {
                   <h1 className="text-center xl:pr-44 text-4xl sm:text-3xl md:text-4xl lg:text-4xl font-sansation bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent font-bold">
                     FITUR UTAMA
                   </h1>
-                  <p className="text-justify mt-4 xl:pr-44 px-4 lg:pr-14 xl:px-0 sm:px-6 md:px-10">
+                  <p className="text-justify mt-4 xl:pr-44 px-4 lg:pr-14 xl:px-0 sm:px-6 md:px-10 text-[16px]">
                     Re-PIT menawarkan kemudahan dalam pengajuan Web Event dengan
                     sistem terstruktur, notifikasi otomatis, dan panel
                     administrasi lengkap untuk pengelolaan pendaftaran yang
