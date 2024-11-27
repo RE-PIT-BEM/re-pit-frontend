@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import warning from "../assets/Warning.svg";
+import warning from "../assets/warning.svg";
 
 const Reason = () => {
   return (

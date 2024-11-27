@@ -5,7 +5,6 @@ import "./index.css";
 import App from "./App";
 import Home from "./view/Home.jsx";
 import Navbar from "./components/Navbar.jsx";
-import Login from "./components/Login.jsx";
 import Request from "./view/Request.jsx";
 import Reason from "./components/Reason.jsx";
 import DaftarRequest from "./view/DaftarRequest.jsx";
@@ -14,6 +13,7 @@ import { Toaster } from "react-hot-toast";
 import RequireAuth from "./components/RequireAuth.jsx";
 import OnlyGuest from "./components/OnlyGuest.jsx";
 import DetailRequest from "./view/DetailRequest.jsx";
+import Login from "./components/login.jsx";
 
 // Create a client
 const queryClient = new QueryClient();

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import rePIT from "../assets/rePIT.svg";
-import daftareq from "../assets/button/Daftareq.svg";
-import LogoutSVG from "../assets/button/Logout.svg";
-import reqbaru from "../assets/button/Reqbaru.svg";
+import daftareq from "../assets/button/daftareq.svg";
+import LogoutSVG from "../assets/button/logout.svg";
+import reqbaru from "../assets/button/reqbaru.svg";
 import useAuth from "../hooks/useAuth";
 
 const Sidebar = () => {
