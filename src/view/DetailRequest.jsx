@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Sidebar from "../components/Sidebar";
 import logo from "../assets/logo.svg";
 import bem from "../assets/bem.svg";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useUserStore from "../lib/userStore";
 import { useForm } from "react-hook-form";
 import { getAccessToken } from "../lib/tokenUtils";
@@ -15,13 +15,6 @@ import useAuth from "../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { formatValueDate } from "../lib/dateUtil";
 import Reason from "../components/Reason";
-
-const getRequest = (id) => {
-  try {
-  } catch (error) {
-    console.ler;
-  }
-};
 
 const DetailRequest = () => {
   const {
@@ -35,6 +28,7 @@ const DetailRequest = () => {
 
   const { user } = useAuth();
   const [dataRequest, setDataRequest] = useState(null);
+  const router = useNavigate();
   const queryClient = useQueryClient();
 
   const { status, data, error, isLoading } = useQuery(
@@ -78,15 +72,15 @@ const DetailRequest = () => {
     return currentDate.toISOString().split("T")[0];
   });
 
-  // const mutationAddReq = useMutation((data) => {
-  //   const token = getAccessToken();
-  //   if (!token) return null;
-  //   return api.post("/request", data, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  // });
+  const mutationUpdateReq = useMutation((data) => {
+    const token = getAccessToken();
+    if (!token) return null;
+    return api.put(`/request/${params.requestId}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  });
 
   const mutationRejectionReq = useMutation((data) => {
     const token = getAccessToken();
@@ -109,24 +103,7 @@ const DetailRequest = () => {
   });
 
   const onSubmit = (data) => {
-    const openDate = new Date(data.program_open_date).toISOString();
-    const closeDate = new Date(data.program_close_date).toISOString();
-    const announcementDate = new Date(
-      data.program_announcement_date
-    ).toISOString();
-    const websiteReleaseDate = new Date(
-      data.website_release_date
-    ).toISOString();
-
-    data = {
-      ...data,
-      program_open_date: openDate,
-      program_close_date: closeDate,
-      program_announcement_date: announcementDate,
-      website_release_date: websiteReleaseDate,
-    };
-
-    mutationAddReq.mutate(data, {
+    mutationUpdateReq.mutate(data, {
       onError: (error, variables, context) => {
         // An error happened!
         console.log(`error: `, error);
@@ -136,11 +113,10 @@ const DetailRequest = () => {
       },
       onSuccess: (data, variables, context) => {
         const message = data.data.message;
-        reset();
         toast.success(message);
-        Navigate({
-          to: "/daftar-request",
-        });
+        queryClient.invalidateQueries(`request/${params.requestId}`);
+
+        router("/daftar-request");
       },
     });
   };
@@ -202,7 +178,7 @@ const DetailRequest = () => {
         {!isLoading && !data ? <Navigate to={`/daftar-request`} /> : null}
 
         {/* Main Content */}
-        {data && !isLoading && dataRequest ? (
+        {data && !isLoading ? (
           <form onSubmit={handleSubmit(onSubmit)} className="flex-grow p-8">
             <h1 className="text-2xl font-bold mt-8 lg:mt-4 mb-4 lg:mb-6 font-sansation text-white">
               Halo, {user.name} dari {user.department}!
@@ -221,7 +197,7 @@ const DetailRequest = () => {
                 <input
                   {...register("program_name", {
                     required: true,
-                    value: dataRequest.program_name,
+                    value: data.data.data.request.program_name,
                   })}
                   placeholder="FILAFEST"
                   type="text"
@@ -241,7 +217,7 @@ const DetailRequest = () => {
                     <select
                       {...register("department", {
                         required: true,
-                        value: dataRequest.department,
+                        value: data.data.data.request.department,
                       })}
                       className="w-full bg-transparent text-white border border-neutral-400 hover:bg-home hover:border-[#7A5DDA] py-3 px-2 mt-2 rounded-[5px]"
                     >
@@ -273,7 +249,7 @@ const DetailRequest = () => {
                     <input
                       {...register("group_link", {
                         required: "Link harus diisi!",
-                        value: dataRequest.group_link,
+                        value: data.data.data.request.group_link,
                         pattern: {
                           value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
                           message: "Link tidak valid!",
@@ -299,7 +275,7 @@ const DetailRequest = () => {
                     <input
                       {...register("contact_name", {
                         required: true,
-                        value: dataRequest.contact_name,
+                        value: data.data.data.request.contact_name,
                       })}
                       placeholder="Ajes"
                       type="text"
@@ -320,7 +296,7 @@ const DetailRequest = () => {
                     <input
                       {...register("contact_info", {
                         required: true,
-                        value: dataRequest.contact_info,
+                        value: data.data.data.request.contact_info,
                       })}
                       placeholder="081246091171"
                       type="text"
@@ -340,7 +316,7 @@ const DetailRequest = () => {
                 <textarea
                   {...register("program_description", {
                     required: true,
-                    value: dataRequest.program_description,
+                    value: data.data.data.request.program_description,
                   })}
                   placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus."
                   className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white placeholder:text-left placeholder:top-0"
@@ -360,7 +336,7 @@ const DetailRequest = () => {
                     <textarea
                       {...register("program_timeline", {
                         required: true,
-                        value: dataRequest.program_timeline,
+                        value: data.data.data.request.program_timeline,
                       })}
                       placeholder="PKKMB
             - Coming Soon: 19 Maret
@@ -386,7 +362,7 @@ const DetailRequest = () => {
                     </h1>
                     <textarea
                       {...register("program_timeline_extend", {
-                        value: dataRequest.program_timeline_extend,
+                        value: data.data.data.request.program_timeline_extend,
                       })}
                       placeholder="info info"
                       type="text"
@@ -405,7 +381,7 @@ const DetailRequest = () => {
                     <input
                       {...register("program_photo_url", {
                         required: "Link harus diisi!",
-                        value: dataRequest.program_photo_url,
+                        value: data.data.data.request.program_photo_url,
                         pattern: {
                           value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
                           message: "Link tidak valid!",
@@ -428,7 +404,7 @@ const DetailRequest = () => {
                     </h1>
                     <input
                       {...register("program_logo_url", {
-                        value: dataRequest.program_logo_url,
+                        value: data.data.data.request.program_logo_url,
                       })}
                       placeholder="https://drive.google.com/ajesplisbuatporto"
                       type="text"
@@ -444,7 +420,7 @@ const DetailRequest = () => {
                     <input
                       {...register("program_division", {
                         required: true,
-                        value: dataRequest.program_division,
+                        value: data.data.data.request.program_division,
                       })}
                       placeholder="DDM, Humas, Acara"
                       type="text"
@@ -470,7 +446,7 @@ const DetailRequest = () => {
                     <textarea
                       {...register("acceptence_message", {
                         required: true,
-                        value: dataRequest.acceptence_message,
+                        value: data.data.data.request.acceptence_message,
                       })}
                       placeholder="SELAMAT KAMU DITERIMA (>.<)
 
@@ -498,7 +474,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     <textarea
                       {...register("rejection_message", {
                         required: true,
-                        value: dataRequest.rejection_message,
+                        value: data.data.data.request.rejection_message,
                       })}
                       placeholder="yahahhahaa ditolak "
                       type="text"
@@ -521,7 +497,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     <textarea
                       {...register("program_quotes", {
                         required: true,
-                        value: dataRequest.program_quotes,
+                        value: data.data.data.request.program_quotes,
                       })}
                       placeholder="“Porto nomor sekian, UKM hindu yang utama” - Ajes"
                       type="text"
@@ -543,7 +519,7 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                     <textarea
                       {...register("program_registration_flow", {
                         required: true,
-                        value: dataRequest.program_registration_flow,
+                        value: data.data.data.request.program_registration_flow,
                       })}
                       placeholder="1. Peserta membuka link pendaftaran yang telah disediakan oleh BEM FILKOM
 2. Peserta membaca panduan Alur Pendaftaran Open Tender
@@ -580,7 +556,7 @@ No Hp :
                       {...register("program_application_form", {
                         required:
                           "Data yang dibutuhkan Proker / Event harus diisi!",
-                        value: dataRequest.program_application_form,
+                        value: data.data.data.request.program_application_form,
                       })}
                     ></textarea>
                     {errors.program_application_form && (
@@ -599,7 +575,7 @@ No Hp :
                       <input
                         {...register("accepted_batch", {
                           required: "Wajib Diisi!",
-                          value: dataRequest.accepted_batch,
+                          value: data.data.data.request.accepted_batch,
                         })}
                         placeholder="2023 & 2024"
                         type="text"
@@ -620,7 +596,9 @@ No Hp :
                       <input
                         {...register("program_registration_template", {
                           required: "Link harus diisi!",
-                          value: dataRequest.program_registration_template,
+                          value:
+                            data.data.data.request
+                              .program_registration_template,
                           pattern: {
                             value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/,
                             message: "Link tidak valid!",
@@ -646,11 +624,11 @@ No Hp :
                       <span className="text-[#7A5DDA]">*</span>
                     </h1>
                     <input
-                      {...register("program_open_date", {
-                        required: true,
-                        value: formatValueDate(dataRequest.program_open_date),
-                      })}
                       type="date"
+                      disabled={true}
+                      value={formatValueDate(
+                        data.data.data.request.program_open_date
+                      )}
                       min={minDate} // Prevents past dates
                       className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-gray-500 text-white"
                     />
@@ -668,10 +646,10 @@ No Hp :
                       <span className="text-[#7A5DDA]">*</span>
                     </h1>
                     <input
-                      {...register("program_close_date", {
-                        required: true,
-                        value: formatValueDate(dataRequest.program_close_date),
-                      })}
+                      disabled={true}
+                      value={formatValueDate(
+                        data.data.data.request.program_close_date
+                      )}
                       type="date"
                       min={minDate} // Prevents past dates
                       className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
@@ -689,12 +667,10 @@ No Hp :
                       <span className="text-[#7A5DDA]">*</span>
                     </h1>
                     <input
-                      {...register("program_announcement_date", {
-                        required: true,
-                        value: formatValueDate(
-                          dataRequest.program_announcement_date
-                        ),
-                      })}
+                      disabled={true}
+                      value={formatValueDate(
+                        data.data.data.request.program_announcement_date
+                      )}
                       type="date"
                       min={minDate} // Prevents past dates
                       className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
@@ -712,12 +688,10 @@ No Hp :
                       <span className="text-[#7A5DDA]">*</span>
                     </h1>
                     <input
-                      {...register("website_release_date", {
-                        required: true,
-                        value: formatValueDate(
-                          dataRequest.website_release_date
-                        ),
-                      })}
+                      disabled={true}
+                      value={formatValueDate(
+                        data.data.data.request.website_release_date
+                      )}
                       type="date"
                       min={minDate} // Prevents past dates
                       className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
@@ -731,7 +705,7 @@ No Hp :
                 </div>
                 {/*____________________________________________________ EDIT REQUEST _____________________________________________________________________ */}
                 {new Date().setHours(0, 0, 0, 0) !==
-                new Date(dataRequest.program_open_date) ? (
+                new Date(data.data.data.request.program_open_date) ? (
                   <div className="mx-auto mt-16 lg:mt-0 ">
                     <button
                       className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA]  duration-300"
@@ -742,7 +716,8 @@ No Hp :
                   </div>
                 ) : null}
 
-                {user.role === "ADMIN" && dataRequest.status === "PENDING" ? (
+                {user.role === "ADMIN" &&
+                data.data.data.request.status === "PENDING" ? (
                   <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 lg:gap-8 lg:pb-10">
                     <button
                       type="button"
@@ -796,7 +771,7 @@ No Hp :
           </h1>
         </div>
       </footer>
-      <dialog id="modal_rejection" class="modal">
+      <dialog id="modal_rejection" className="modal">
         {/* <div class="modal-box"> */}
         <Reason handlerRejection={rejectRequest} />
         {/* </div> */}
