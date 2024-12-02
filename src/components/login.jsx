@@ -41,8 +41,7 @@ const Login = () => {
 
   return (
     <form
-      className="h-screen bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: `url(${polygonHome})` }}
+      className="h-screen bg-cover bg-center flex items-center justify-center polygon-bg"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className=" xl:w-4/12 lg:w-6/12 md:w-7/12 md:py-12 lg:py-14 xl:py-16 bg-[#151618] mx-auto py-4 rounded-xl pl-16 pr-16">

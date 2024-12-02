@@ -25,13 +25,13 @@ const Home = () => {
 
         <div className="bg-home min-h-screen flex flex-grow flex-col items-center justify-center">
           <div
-            className={`bg-cover bg-center w-full min-h-screen ${
+            className={`bg-cover polygon-bg bg-center w-full min-h-screen bg-fixed ${
               isAnimated ? "animate-fade-in" : ""
             }`}
-            style={{
-              backgroundImage: `url(${polygonHome})`,
-              backgroundAttachment: "fixed",
-            }}
+            // style={{
+            //   backgroundImage: `url(${polygonHome})`,
+            //   backgroundAttachment: "fixed",
+            // }}
           >
             <div className="w-full flex flex-col lg:gap-10 mt-28 items-center">
               {/* Landing Page Heading */}
