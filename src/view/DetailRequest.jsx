@@ -173,7 +173,11 @@ const DetailRequest = () => {
           <Sidebar />
         </div>
 
-        {isLoading && <div>Loading...</div>}
+        {isLoading && (
+          <div className="flex w-full justify-center items-center text-center font-sansation text-[24px] text-white">
+            sedikit lagi!!
+          </div>
+        )}
 
         {!isLoading && !data ? <Navigate to={`/daftar-request`} /> : null}
 
@@ -195,13 +199,14 @@ const DetailRequest = () => {
                   Nama Program Kerja <span className="text-[#7A5DDA]">*</span>
                 </h1>
                 <input
+                  disabled={data.data.data.request.status === "ACCEPTED"}
                   {...register("program_name", {
                     required: true,
                     value: data.data.data.request.program_name,
                   })}
                   placeholder="FILAFEST"
                   type="text"
-                  className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                  className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                 />
                 {errors.program_name && (
                   <small className="text-red-500">
@@ -215,11 +220,12 @@ const DetailRequest = () => {
                       <span className="text-[#7A5DDA]">*</span>
                     </h1>
                     <select
+                      disabled={data.data.data.request.status === "ACCEPTED"}
                       {...register("department", {
                         required: true,
                         value: data.data.data.request.department,
                       })}
-                      className="w-full bg-transparent text-white border border-neutral-400 hover:bg-home hover:border-[#7A5DDA] py-3 px-2 mt-2 rounded-[5px]"
+                      className="w-full bg-transparent text-white border disabled:border-opacity-10 disabled:cursor-not-allowed border-neutral-400 hover:bg-home hover:border-[#7A5DDA] py-3 px-2 mt-2 rounded-[5px]"
                     >
                       <option value="" disabled selected>
                         Pilih Kementrian / Kebiroan
@@ -255,9 +261,10 @@ const DetailRequest = () => {
                           message: "Link tidak valid!",
                         },
                       })}
+                      disabled={data.data.data.request.status === "ACCEPTED"}
                       placeholder="https://waa.wwa/88080"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.group_link && (
                       <small className="text-red-500">
@@ -277,9 +284,10 @@ const DetailRequest = () => {
                         required: true,
                         value: data.data.data.request.contact_name,
                       })}
+                      disabled={data.data.data.request.status === "ACCEPTED"}
                       placeholder="Ajes"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.contact_name && (
                       <small className="text-red-500">
@@ -298,9 +306,10 @@ const DetailRequest = () => {
                         required: true,
                         value: data.data.data.request.contact_info,
                       })}
+                      disabled={data.data.data.request.status === "ACCEPTED"}
                       placeholder="081246091171"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.contact_info && (
                       <small className="text-red-500">
@@ -318,8 +327,9 @@ const DetailRequest = () => {
                     required: true,
                     value: data.data.data.request.program_description,
                   })}
-                  placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus."
-                  className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white placeholder:text-left placeholder:top-0"
+                  disabled={data.data.data.request.status === "ACCEPTED"}
+                  placeholder="RE-PIT adalah platform request Web Event yang dikembangkan oleh Kebiroan PIT BEM FILKOM UB untuk memfasilitasi pengajuan, pengelolaan, dan konfirmasi event secara terstruktur dan efisien. Platform ini bertujuan membantu kementerian dan organisasi BEM dalam melaksanakan program kerja mereka dengan lebih mudah dan teratur. Dengan sistem yang dirancang sesuai SOP, Re-PIT memastikan setiap detail kebutuhan acara tercatat dengan jelas, mengurangi ambiguitas dalam pengisian form, dan memungkinkan setiap proses request hingga persetujuan berjalan lancar."
+                  className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white placeholder:text-left placeholder:top-0"
                   rows="6"
                   style={{ resize: "none" }}
                 />
@@ -338,6 +348,7 @@ const DetailRequest = () => {
                         required: true,
                         value: data.data.data.request.program_timeline,
                       })}
+                      disabled={data.data.data.request.status === "ACCEPTED"}
                       placeholder="PKKMB
             - Coming Soon: 19 Maret
             - Open Tender: 21 Maret - 25 Maret
@@ -345,7 +356,7 @@ const DetailRequest = () => {
             - FnP: 29 Maret - 31 Maret (daring)
             - Pengumuman: 2 April"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       rows="6"
                       style={{ resize: "none" }}
                     />
@@ -364,10 +375,11 @@ const DetailRequest = () => {
                       {...register("program_timeline_extend", {
                         value: data.data.data.request.program_timeline_extend,
                       })}
-                      placeholder="info info"
+                      placeholder="Pendaftaran diperpanjang hingga ..."
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       rows="6"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
                       style={{ resize: "none" }}
                     />
                   </div>
@@ -389,7 +401,8 @@ const DetailRequest = () => {
                       })}
                       placeholder="https://drive.google.com/ajesplisbuatporto"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.program_photo_url && (
                       <small className="text-red-500">
@@ -408,7 +421,8 @@ const DetailRequest = () => {
                       })}
                       placeholder="https://drive.google.com/ajesplisbuatporto"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                   </div>
                 </div>
@@ -424,7 +438,8 @@ const DetailRequest = () => {
                       })}
                       placeholder="DDM, Humas, Acara"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.program_division && (
                       <small className="text-red-500">
@@ -455,7 +470,8 @@ Silahkan simak pengumuman di bawah ini:
 Silahkan gabung grup berikut:
 https://line.me/ti/AjEsbuaTp0rtoYUK"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       rows="6"
                       style={{ resize: "none" }}
                     />
@@ -478,7 +494,8 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                       })}
                       placeholder="yahahhahaa ditolak "
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       rows="6"
                       style={{ resize: "none" }}
                     />
@@ -501,7 +518,8 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                       })}
                       placeholder="“Porto nomor sekian, UKM hindu yang utama” - Ajes"
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       rows="6"
                       style={{ resize: "none" }}
                     />
@@ -526,7 +544,8 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
 3. ....
 4. .... "
                       type="text"
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      disabled={data.data.data.request.status === "ACCEPTED"}
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       rows="6"
                       style={{ resize: "none" }}
                     />
@@ -544,9 +563,10 @@ https://line.me/ti/AjEsbuaTp0rtoYUK"
                       <span className="text-[#7A5DDA]">*</span>
                     </h1>
                     <textarea
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       rows="6"
                       style={{ resize: "none" }}
+                      disabled={data.data.data.request.status === "ACCEPTED"}
                       placeholder="Nama Lengkap : 
 Nama Panggilan :
 Prodi :
@@ -579,7 +599,8 @@ No Hp :
                         })}
                         placeholder="2023 & 2024"
                         type="text"
-                        className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                        disabled={data.data.data.request.status === "ACCEPTED"}
+                        className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       />
                       {errors.accepted_batch && (
                         <small className="text-red-500">
@@ -606,7 +627,8 @@ No Hp :
                         })}
                         placeholder="https://drive.google.com/ajesplisbuatporto"
                         type="text"
-                        className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                        disabled={data.data.data.request.status === "ACCEPTED"}
+                        className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                       />
                       {errors.program_registration_template && (
                         <small className="text-red-500">
@@ -630,7 +652,7 @@ No Hp :
                         data.data.data.request.program_open_date
                       )}
                       min={minDate} // Prevents past dates
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-gray-500 text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-gray-500 text-white"
                     />
 
                     {errors.program_open_date && (
@@ -652,7 +674,7 @@ No Hp :
                       )}
                       type="date"
                       min={minDate} // Prevents past dates
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.program_close_date && (
                       <small className="text-red-500">
@@ -673,7 +695,7 @@ No Hp :
                       )}
                       type="date"
                       min={minDate} // Prevents past dates
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.program_announcement_date && (
                       <small className="text-red-500">
@@ -694,7 +716,7 @@ No Hp :
                       )}
                       type="date"
                       min={minDate} // Prevents past dates
-                      className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
+                      className="w-full bg-transparent border border-neutral-400 disabled:border-opacity-10 disabled:cursor-not-allowed py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     />
                     {errors.website_release_date && (
                       <small className="text-red-500">
@@ -705,7 +727,10 @@ No Hp :
                 </div>
                 {/*____________________________________________________ EDIT REQUEST _____________________________________________________________________ */}
                 {new Date().setHours(0, 0, 0, 0) !==
-                new Date(data.data.data.request.program_open_date) ? (
+                new Date().setDate(
+                  new Date(data.data.data.request.program_open_date).getDate() -
+                    1
+                ) ? (
                   <div className="mx-auto mt-16 lg:mt-0 ">
                     <button
                       className="w-full h-full bg-gradient-to-r from-[#7A5DDA] to-[#493883] hover:to-white hover:from-white py-3 rounded-md text-[18px] font-bold text-white hover:text-[#7A5DDA]  duration-300"
@@ -718,7 +743,7 @@ No Hp :
 
                 {user.role === "ADMIN" &&
                 data.data.data.request.status === "PENDING" ? (
-                  <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 lg:gap-8 lg:pb-10">
+                  <div className="mt-8 gap-2 grid grid-cols-1 lg:grid-cols-2 lg:gap-8 lg:pb-10">
                     <button
                       type="button"
                       onClick={() =>

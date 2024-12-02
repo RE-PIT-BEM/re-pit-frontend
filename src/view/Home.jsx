@@ -25,7 +25,9 @@ const Home = () => {
 
         <div className="bg-home min-h-screen flex flex-grow flex-col items-center justify-center">
           <div
-            className="bg-cover bg-center w-full min-h-screen"
+            className={`bg-cover bg-center w-full min-h-screen ${
+              isAnimated ? "animate-fade-in" : ""
+            }`}
             style={{
               backgroundImage: `url(${polygonHome})`,
               backgroundAttachment: "fixed",
@@ -34,7 +36,7 @@ const Home = () => {
             <div className="w-full flex flex-col lg:gap-10 mt-28 items-center">
               {/* Landing Page Heading */}
               <div
-                className={`text-center ${isAnimated ? "animate-fade-in" : ""}`}
+                className={`text-center ${isAnimated ? "animate-zoom-in" : ""}`}
               >
                 <h1 className="font-sansation px-8 sm:px-10 md:px-36 lg:px-20 xl:px-60 select-none bg-gradient-to-r from-[#7A5DDA] to-[#e3e0ed] bg-clip-text text-transparent font-bold xl:text-[96px] lg:text-[96px] md:text-[56px] text-[50px] leading-tight">
                   Request Web Event Tanpa Ribet!
@@ -44,7 +46,7 @@ const Home = () => {
               {/* Landing Page Description */}
               <div
                 className={`select-none w-fit text-white text-lg text-center px-[22px] sm:px-[150px] md:px-[100px] lg:px-[250px] xl:px-[450px] lg:-mt-4 mt-4 ${
-                  isAnimated ? "animate-fade-in" : ""
+                  isAnimated ? "animate-zoom-in" : ""
                 }`}
               >
                 Permudah proses request Web Event sesuai kebutuhanmu. Lengkapi
