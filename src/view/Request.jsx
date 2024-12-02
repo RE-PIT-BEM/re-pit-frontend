@@ -218,7 +218,7 @@ const Request = () => {
               </h1>
               <textarea
                 {...register("program_description", { required: true })}
-                placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus."
+                placeholder="RE-PIT adalah platform request Web Event yang dikembangkan oleh Kebiroan PIT BEM FILKOM UB untuk memfasilitasi pengajuan, pengelolaan, dan konfirmasi event secara terstruktur dan efisien. Platform ini bertujuan membantu kementerian dan organisasi BEM dalam melaksanakan program kerja mereka dengan lebih mudah dan teratur. Dengan sistem yang dirancang sesuai SOP, Re-PIT memastikan setiap detail kebutuhan acara tercatat dengan jelas, mengurangi ambiguitas dalam pengisian form, dan memungkinkan setiap proses request hingga persetujuan berjalan lancar."
                 className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white placeholder:text-left placeholder:top-0"
                 rows="6"
                 style={{ resize: "none" }}
@@ -260,7 +260,7 @@ const Request = () => {
                   </h1>
                   <textarea
                     {...register("program_timeline_extend")}
-                    placeholder="info info"
+                    placeholder="Pendaftaran diperpanjang hingga"
                     type="text"
                     className="w-full bg-transparent border border-neutral-400 py-3 px-3 mt-2 rounded-[5px] focus:border-[#7A5DDA] focus:outline-none placeholder:text-[#4F4F4F] text-white"
                     rows="6"

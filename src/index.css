@@ -58,6 +58,17 @@
   }
 }
 
+@keyframes zoom-in {
+  from {
+    transform: scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .animate-slide-up {
   animation: slide-up 1.5s ease-out;
 }
@@ -72,4 +83,8 @@
 
 .animate-fade-in {
   animation: fade-in 1.5s ease-in;
+}
+
+.animate-zoom-in {
+  animation: zoom-in 1.5s ease-in;
 }

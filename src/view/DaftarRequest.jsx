@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import logo from "../assets/logo.svg";
 import bem from "../assets/bem.svg";
-import error from "../assets/error.svg";
+import errorsvg from "../assets/error.svg";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { getAccessToken } from "../lib/tokenUtils";
 import api from "../lib/api";
 import { useQuery } from "react-query";
 import formatDate from "../lib/dateUtil";
+import ReasonDisplay from "../components/ReasonDisplay";
 
 const getRequest = () => {
   const token = getAccessToken();
@@ -39,11 +40,11 @@ const Request = () => {
     <div className="relative min-h-screen bg-home flex flex-col">
       {" "}
       <div className="flex">
-        {/* <div className="w-0 md:w-0 lg:w-96 xl:w-64"> */}
-        <Sidebar />
-        {/* </div> */}
+        <div className="w-0 md:w-0 lg:w-64">
+          <Sidebar />
+        </div>
 
-        <div className="flex-grow p-8 relative">
+        <div className="flex-grow p-8 relative lg:w-64">
           <h1 className="text-2xl font-bold mt-8 lg:mt-4 mb-4 lg:mb-6  font-sansation text-white">
             Halo, {user.name} dari {user.department}!
           </h1>
@@ -55,9 +56,32 @@ const Request = () => {
                   <h1 className="font-sansation lg:pb-4 font-bold text-start text-[24px] bg-gradient-to-r from-[#493883] to-[#7A5DDA] bg-clip-text text-transparent">
                     {request.program_name}
                   </h1>
-                  <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-sukses flex items-center justify-start lg:justify-end">
-                    {request.status}
-                  </h1>
+                  {request.status === "ACCEPTED" && (
+                    <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-sukses flex items-center justify-start lg:justify-end">
+                      {request.status}
+                    </h1>
+                  )}
+
+                  {request.status === "REJECTED" && (
+                    <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-error flex items-center justify-start lg:justify-end">
+                      {request.status}{" "}
+                      <span
+                        onClick={() =>
+                          document
+                            .getElementById(`rejection_display_${request.id}`)
+                            .showModal()
+                        }
+                      >
+                        <img src={errorsvg} alt="Error icon" className="ml-2" />
+                      </span>
+                    </h1>
+                  )}
+
+                  {request.status === "PENDING" && (
+                    <h1 className="text-end font-sansation pb-4 font-bold text-[24px] text-warning flex items-center justify-start lg:justify-end">
+                      {request.status}{" "}
+                    </h1>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-6 xl:grid-cols-8 text-left gap-4 md:gap-0 text-white">
@@ -101,6 +125,13 @@ const Request = () => {
                   </div>
                 </div>
               </div>
+
+              <dialog id={`rejection_display_${request.id}`} className="modal">
+                <ReasonDisplay
+                  message={request.rejected_status_message}
+                  requestId={request.id}
+                />
+              </dialog>
             </>
           ))}
         </div>

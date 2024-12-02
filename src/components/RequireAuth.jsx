@@ -7,17 +7,9 @@ const RequireAuth = (props) => {
   if (auth.loading) {
     return (
       <div className="bg-home">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-            fontSize: "20px",
-            fontFamily: "'Sansation', sans-serif",
-          }}
-        >
-          Loading...
+        <div className="flex w-screen h-screen justify-center items-center text-justify font-sansation text-[25px] text-white px-48">
+          daffa said : ui/ux dan front end ada bukti fisik yang dikerjakan. kalo
+          back end apa kabar mas ?
         </div>
       </div>
     );
